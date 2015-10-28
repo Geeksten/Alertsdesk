@@ -34,7 +34,22 @@ class User(db.Model):
 class Userreport(db.Model):
     """User report on Alerts website."""
 
-    pass
+    __tablename__ = "userreports"
+
+    urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    fname = db.Column(db.String(64), nullable=False)
+    zipcode = db.Column(db.String(5), nullable=False)
+    report = db.column(db.String(200), nullable=False)
+
+    # Define relationship to user
+    user = db.relationship("User",
+                           backref=db.backref("userreports", order_by=urep_id))
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Userreport zipcode=%s report=%s>" % (self.zipcode, self.report)
 
 
 class Reportsymptom(db.Model):

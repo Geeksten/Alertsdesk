@@ -53,7 +53,27 @@ class Userreport(db.Model):
 
 
 class Reportsymptom(db.Model):
-    pass
+    __tablename__ = "reportsymptoms"
+
+    reportsym_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    urep_id = db.Column(db.Integer, db.ForeignKey('userreports.urep_id'))
+    sym_id = db.Column(db.Integer, db.ForeignKey('symptoms.sym_id'))
+
+    # Define relationship to user
+    userreport = db.relationship("Userreport",
+                                 backref=db.backref("reportsymptoms",
+                                                    order_by=reportsym_id))
+
+    # Define relationship to sympyom
+    symptom = db.relationship("Symptoms",
+                              backref=db.backref("reportsymptoms",
+                                                 order_by=reportsym_id))
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Reportsymptom reportsym_id=%s urep_id=%s sym_id=%s>" % (
+            self.reportsym_id, self.urep_id, self.sym_id)
 
 
 class Symptoms(db.Model):

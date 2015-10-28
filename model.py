@@ -53,6 +53,7 @@ class Userreport(db.Model):
 
 
 class Reportsymptom(db.Model):
+    """Provides a way to connect the userreports and symptoms tables"""
     __tablename__ = "reportsymptoms"
 
     reportsym_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -65,7 +66,7 @@ class Reportsymptom(db.Model):
                                                     order_by=reportsym_id))
 
     # Define relationship to sympyom
-    symptom = db.relationship("Symptoms",
+    symptom = db.relationship("Symptom",
                               backref=db.backref("reportsymptoms",
                                                  order_by=reportsym_id))
 
@@ -76,8 +77,21 @@ class Reportsymptom(db.Model):
             self.reportsym_id, self.urep_id, self.sym_id)
 
 
-class Symptoms(db.Model):
-    pass
+class Symptom(db.Model):
+    """Symptoms on Alerts website."""
+
+    __tablename__ = "symptoms"
+
+    sym_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    sym_name = db.Column(db.String(64), nullable=False)
+    description = db.column(db.String(200), nullable=False)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Symptom sym_id=%s sym_name=%s description>" % (
+            self.sym_id, self.sym_name, self.description)
+
 
 ##############################################################################
 # Helper functions

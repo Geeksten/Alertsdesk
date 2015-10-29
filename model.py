@@ -39,7 +39,9 @@ class Userreport(db.Model):
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     fname = db.Column(db.String(64), nullable=False)
-    zipcode = db.Column(db.String(5), nullable=False)
+    address = db.Column(db.Sring(64))
+    latitude = db.Column(db.String(64), nullable=False)
+    longitude = db.Column(db.String(64), nullable=False)
     report = db.column(db.String(200), nullable=False)
 
     # Define relationship to user
@@ -49,7 +51,7 @@ class Userreport(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Userreport zipcode=%s report=%s>" % (self.zipcode, self.report)
+        return "<Userreport latitude=%s longitude=%s report=%s>" % (self.latitude, self.longitude, self.report)
 
 
 class Reportsymptom(db.Model):
@@ -91,7 +93,6 @@ class Symptom(db.Model):
 
         return "<Symptom sym_id=%s sym_name=%s description>" % (
             self.sym_id, self.sym_name, self.description)
-
 
 ##############################################################################
 # Helper functions

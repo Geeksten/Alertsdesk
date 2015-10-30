@@ -38,10 +38,10 @@ class Userreport(db.Model):
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     fname = db.Column(db.String(64), nullable=False)
-    address = db.Column(db.Sring(64))
+    address = db.Column(db.String(64))
     latitude = db.Column(db.String(64), nullable=False)
     longitude = db.Column(db.String(64), nullable=False)
-    report = db.column(db.String(200), nullable=False)
+    report = db.Column(db.String(200), nullable=False)
 
     # Define relationship to user
     user = db.relationship("User",
@@ -86,7 +86,7 @@ class Symptom(db.Model):
 
     sym_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     sym_name = db.Column(db.String(64), nullable=False)
-    description = db.column(db.String(200), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         """Providesde helpful representation when printed."""
@@ -141,7 +141,7 @@ class Fdarecall(db.Model):
 
     __tablename__ = "fdarecalls"
 
-    recall_id = db.Column(db.Integer(20), autoincrement=True, primary_key=True)
+    recall_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     status = db.Column(db.String(20), nullable=False)
     recall_date = db.Column(db.DateTime, nullable=False)
     recall_firm = db.Column(db.String(50), nullable=False)

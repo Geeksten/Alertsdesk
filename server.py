@@ -19,11 +19,11 @@ app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
 
-# @app.route('/')
-# def index():
-#     """Homepage."""
+@app.route('/')
+def index():
+    """Homepage."""
 
-#     return render_template("homepage.html")
+    return render_template("index.html")
 
 
 # @app.route('/register', methods=['GET'])

@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+  <title>Alerts</title>
+</head>
+
+<body>
+  Alerts
+  <hr>
+
+{% for message in get_flashed_messages() %}
+    {{ message }}
+{% endfor %}
+
+  {% block content %} put your content here {% endblock %}
+
+</body>
+</html>

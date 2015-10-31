@@ -1,16 +1,36 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Alerts</title>
 </head>
 
 <body>
-  Alerts
-  <hr>
+<h1>Welcome to Alerts</h1>
+
+<div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+                  <li><a href="/alerts">Alerts</a></li>
+                  <li><a href="/map">View on Map</a></li>
+              
+
+            </ul>
+        </div>
 
 {% for message in get_flashed_messages() %}
     {{ message }}
 {% endfor %}
+
 
   {% block content %} put your content here {% endblock %}
 

@@ -19,8 +19,8 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(64), nullable=False)
-    fname = db.Column(db.String(64), nullable=False)
-    lname = db.Column(db.String(64), nullable=False)
+    firstname = db.Column(db.String(64), nullable=False)
+    lastname = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
 
     def __repr__(self):
@@ -37,7 +37,7 @@ class Userreport(db.Model):
 
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    fname = db.Column(db.String(64), nullable=False)
+    firstname = db.Column(db.String(64), nullable=False)
     address = db.Column(db.String(64))
     latitude = db.Column(db.String(64), nullable=False)
     longitude = db.Column(db.String(64), nullable=False)
@@ -126,7 +126,7 @@ class Staterecall(db.Model):
                                                order_by=state_recallid))
 
     # Define relationship to fdarecall
-    fdarecall = db.relationship("FDArecall",
+    fdarecall = db.relationship("Fdarecall",
                                 backref=db.backref("staterecalls",
                                                    order_by=state_recallid))
 

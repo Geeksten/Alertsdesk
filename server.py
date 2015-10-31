@@ -26,32 +26,32 @@ def index():
     return render_template("index.html")
 
 
-# @app.route('/register', methods=['GET'])
-# def register_form():
-#     """Show form for user signup."""
+@app.route('/register', methods=['GET'])
+def register_form():
+    """Show form for user signup."""
 
-#     return render_template("register_form.html")
-
-
-# @app.route('/register', methods=['POST'])
-# def register_process():
-#     """Process registration."""
-
-#     # Get form variables
-#     email = request.form["email"]
-#     password = request.form["password"]
-#     age = int(request.form["age"])
-#     zipcode = request.form["zipcode"]
-
-#     new_user = User(email=email, password=password, age=age, zipcode=zipcode)
-
-#     db.session.add(new_user)
-#     db.session.commit()
-
-#     flash("User %s added." % email)
-#     return redirect("/")
+    return render_template("register_form.html")
 
 
+@app.route('/register', methods=['POST'])
+def register_process():
+    """Process registration."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+    firstname = (request.form["firstname"])
+    lastname = request.form["lastname"]
+
+    new_user = User(email=email, password=password, firstname=firstname, lastname=lastname)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    flash("Thank you %s, you have been added as a user" % email)
+    return redirect("/")
+
+########################################################################
 # @app.route('/login', methods=['GET'])
 # def login_form():
 #     """Show login form."""

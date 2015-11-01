@@ -25,6 +25,8 @@ def index():
 
     return render_template("index.html")
 
+############################################################################
+
 
 @app.route('/register', methods=['GET'])
 def register_form():
@@ -51,8 +53,8 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
-    flash("Thank you %s, you have been added as a user" % email)
-    return redirect("/")
+    flash("Thank you %s, you have been added as a user. Click the Login link to search" % email)
+    return redirect('/')
 
 ########################################################################
 
@@ -84,17 +86,67 @@ def login_process():
 
     session["user_id"] = user.user_id
 
-    flash("Logged in")
-    return redirect("/search")
+    flash("You logged in successfully")
+    return redirect("/profile/%s" % user.user_id)
 
 #########################################################################
-# @app.route('/logout')
-# def logout():
-#     """Log out."""
 
-#     del session["user_id"]
-#     flash("Logged Out.")
-#     return redirect("/")
+
+@app.route('/profile/<int:user_id>')
+def user_profile(user_id):
+    """Show logged in users profile"""
+
+    user = User.query.get(user_id)
+
+    return render_template("profile.html", user=user)
+
+########################################################################
+
+
+@app.route('/addnewreport', methods=['GET'])
+def add_new_report_form():
+    """Show add new report form."""
+
+    return render_template("add_new_report_form.html")
+
+# @approute('/addreport', methods=['POST'])
+
+# def user_adding_report():
+#     """A form that user can use to add a report of illness."""
+
+#     # Get form variables
+#     email = request.form["email"]
+#     password = request.form["password"]
+
+#     user = User.query.filter_by(email=email).first()
+
+#     if not user:
+#         flash("Sorry no such user found on our system. Please check the email address or register as a new user")
+#         return redirect("/login")
+
+#     if user.password != password:
+#         flash("Incorrect password")
+#         return redirect("/login")
+
+#     session["user_id"] = user.user_id
+
+#     flash("Logged in")
+#     return redirect("/search")
+
+# return render_template("login_form.html")
+#########################################################################
+
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    flash("You have logged out successfully.")
+    return redirect("/")
+
+
+#########################################################################
 
 
 # @app.route("/users")
@@ -104,6 +156,8 @@ def login_process():
 #     users = User.query.all()
 #     return render_template("user_list.html", users=users)
 
+########################################################################
+
 
 # @app.route("/users/<int:user_id>")
 # def user_detail(user_id):
@@ -112,6 +166,8 @@ def login_process():
 #     user = User.query.get(user_id)
 #     return render_template("user.html", user=user)
 
+#######################################################################
+
 
 # @app.route("/movies")
 # def movie_list():
@@ -119,6 +175,8 @@ def login_process():
 
 #     movies = Movie.query.order_by('title').all()
 #     return render_template("movie_list.html", movies=movies)
+
+#####################################################################
 
 
 # @app.route("/movies/<int:movie_id>", methods=['GET'])
@@ -142,6 +200,8 @@ def login_process():
 #     return render_template("movie.html",
 #                            movie=movie,
 #                            user_rating=user_rating)
+
+#######################################################################
 
 
 # @app.route("/movies/<int:movie_id>", methods=['POST'])

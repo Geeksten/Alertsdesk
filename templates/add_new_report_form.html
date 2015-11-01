@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="well spaced" style="width:40%;">
+<h1>Add new report</h1>
+
+<form action="/addnewreport" method="POST">
+
+    <div class="form-group">
+        <label>
+            Address
+            <input type="text" name="address" class="form-control">
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            Report
+            <input type="text" name="report" class="form-control">
+        </label>
+    </div>
+    <label>
+            user_id
+            <input type="text" name="userid" class="form-control">
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            Firstname
+            <input type="text" name="firstname" class="form-control">
+        </label>
+    </div>
+
+    <div class="form-group">
+    <label>
+            Latitude
+            <input type="text" name="address" class="form-control">
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            Longitude
+            <input type="text" name="report" class="form-control">
+        </label>
+    </div>
+
+
+</form>
+</div>
+{% endblock %}

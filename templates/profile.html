@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+  </div>
+  <br>
+
+  <div class="well spaced" style="width:97%">
+                <!-- <li><a href="/login">Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+                  <li><a href="/alerts">Alerts</a></li>
+                  <li><a href="/map">View on Map</a></li>
+              
+
+            </ul>
+        </div>
+        <ul class="nav navbar-nav">
+                
+                <li><a href="/register">Register</a></li> -->
+  <h2>{{ user.firstname }} ({{ user.lastname }})</h2>
+
+  <b><p style="color:green">Email: {{ user.email }}</p></b>
+
+  {% if user.userreports %}
+
+    <h3>Reports</h3>
+    <ul>
+    {% for report in user.userreports %}
+      <li>
+        {{ userreport.user.firstname }}
+        added the following illness report 
+        {{ userreport.report}}
+      </li>
+    {% endfor %}
+    </ul>
+
+    {% else %} 
+    <b><p style="color:blue">No reports found.  <a href="/addnewreport/">Click here to add a new report:</a></p></b>
+
+  {% endif %}
+</div>
+{% endblock %}

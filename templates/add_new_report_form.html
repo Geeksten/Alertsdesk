@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- user will be able to add new report using this form. find a way to retrieve userid and first name from logged in info, also find a way get user latitude and longitude from the given address -->
 <div class="well spaced" style="width:40%;">
 <h1>Add new report</h1>
 
@@ -34,15 +35,19 @@
     <div class="form-group">
     <label>
             Latitude
-            <input type="text" name="address" class="form-control">
+            <input type="text" name="latitude" class="form-control">
         </label>
     </div>
 
     <div class="form-group">
         <label>
             Longitude
-            <input type="text" name="report" class="form-control">
+            <input type="text" name="longitude" class="form-control">
         </label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add new report" class="btn btn-danger">
     </div>
 
 

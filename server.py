@@ -104,36 +104,73 @@ def user_profile(user_id):
 
 
 @app.route('/addnewreport', methods=['GET'])
-def add_new_report_form():
+def report_form():
     """Show add new report form."""
+
+    # user = User.query.get(user_id)
+    # session["user_id"] = user.user_id
+    print session["user_id"]
 
     return render_template("add_new_report_form.html")
 
-# @approute('/addreport', methods=['POST'])
 
-# def user_adding_report():
-#     """A form that user can use to add a report of illness."""
+# @app.route('/addnewreport', methods=['POST'])
+# def report_process():
+#     """Process new report."""
 
 #     # Get form variables
-#     email = request.form["email"]
-#     password = request.form["password"]
 
-#     user = User.query.filter_by(email=email).first()
+#     address = request.form["address"]
+#     report = request.form["report"]
+#     user_id = session["user_id"]
+#     firstname = request.form["firstname"]
+#     latitude = request.form["latitude"]
+#     longitude = request.form["longitude"]
 
-#     if not user:
-#         flash("Sorry no such user found on our system. Please check the email address or register as a new user")
-#         return redirect("/login")
+#     new_userreport = Userreport(address=address, report=report, user_id=user_id, firstname=firstname, latitude=latitude, longitude=longitude)
 
-#     if user.password != password:
-#         flash("Incorrect password")
-#         return redirect("/login")
+#     db.session.add(new_userreport)
+#     db.session.commit()
+
+#     flash("Thank you %s, your report was added. Click the Search link to search for reports" % firstname)
+
+#     # user = Userreport.query.get(user_id)
+
+#     userreport = Userreport.query.filter_by(user_id)
+#     print userreport
+
+#     # return render_template("profile.html", user=user)
+
+#     # return redirect("/profile/%s/%s" % (user.user_id, userreport.urep_id))
+
+#     return render_template("profile.html", userreport=userreport)
+#     # return render_template("profile.html", user=user)
+
+#########################################################################
+
+
+@app.route('/profile/<int:user_id>/<int:urep_id>')
+def user_report(urep_id, user_id):
+    """Show logged in users reports"""
+
+    user = User.query.get(user_id)
+
+    userreport = Userreport.query.filter_by(user_id)
+
+    session["user_id"] = user.user_id
+
+    return render_template("profile.html", userreport=userreport, user=user)
+
+
+# @app.route('/profile/<int:user_id>')
+# def user_profile(user_id):
+#     """Show logged in users profile"""
+
+#     user = User.query.get(user_id)
 
 #     session["user_id"] = user.user_id
 
-#     flash("Logged in")
-#     return redirect("/search")
-
-# return render_template("login_form.html")
+#     return render_template("profile.html", user=user)
 #########################################################################
 
 

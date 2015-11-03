@@ -34,15 +34,15 @@
     <ul>
     {% for report in user.userreports %}
       <li>
-        {{ userreport.user.firstname }}
+        {{ user.firstname }}
         added the following illness report 
-        {{ userreport.report}}
+        {{ user.userreports}}
       </li>
     {% endfor %}
     </ul>
 
     {% else %} 
-    <b><p style="color:blue">No reports found.  <a href="/addnewreport/">Click here to add a new report:</a></p></b>
+    <b><p style="color:blue">No reports found.<a href="/addnewreport">Click here to add a new report:</a></p></b>
 
   {% endif %}
 </div>

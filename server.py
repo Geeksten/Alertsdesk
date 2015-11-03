@@ -160,9 +160,9 @@ def report_process():
     # user = User.query.filter_by(email=email).first()
     user = User.query.get(user_id)
     print "*********************** user is %s" % user
-    userreport = Userreport.query.filter_by(user_id=user_id).all()
+    userreport_list = Userreport.query.filter_by(user_id=user_id).all()
 
-    print "*********************** userreport is %s" % userreport
+    print "*********************** userreport is %s" % userreport_list
 
     # user_id = session.get("user_id")
 
@@ -174,7 +174,7 @@ def report_process():
 #     # return redirect("/profile/%s/%s" % (user.user_id, userreport.urep_id))
 
 #     return render_template("profile.html", userreport=userreport)
-    return render_template("userreport.html", userreport=userreport, user=user)
+    return render_template("userreport.html", userreport_list=userreport_list, user=user)
 
 #########################################################################
 

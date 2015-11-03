@@ -37,7 +37,7 @@ class Userreport(db.Model):
 
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    firstname = db.Column(db.String(64), nullable=False)
+    # firstname = db.Column(db.String(64), nullable=False)
     address = db.Column(db.String(64))
     latitude = db.Column(db.String(64), nullable=False)
     longitude = db.Column(db.String(64), nullable=False)
@@ -50,7 +50,7 @@ class Userreport(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Userreport latitude=%s longitude=%s report=%s>" % (self.latitude, self.longitude, self.report)
+        return "<Userreport report=%s>" % (self.report)
 
 
 class Reportsymptom(db.Model):

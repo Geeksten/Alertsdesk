@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- user will be able to add new report using this form. find a way to retrieve userid and first name from logged in info, also find a way get user latitude and longitude from the given address -->
-<div class="well spaced" style="width:40%;">
-<h1>Add new report</h1>
+<div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+  </div>
+  <br>
 
-<form action="/addnewreport" method="POST">
+<div class="well spaced" style="width:40%;">
+<h1> Add new report</h1>
+
+<form action="/userreport" method="POST">
 
     <div class="form-group">
         <label>
@@ -17,18 +26,6 @@
         <label>
             Report
             <input type="text" name="report" class="form-control">
-        </label>
-    </div>
-    <label>
-            user_id
-            <input type="text" name="userid" class="form-control">
-        </label>
-    </div>
-
-    <div class="form-group">
-        <label>
-            Firstname
-            <input type="text" name="firstname" class="form-control">
         </label>
     </div>
 

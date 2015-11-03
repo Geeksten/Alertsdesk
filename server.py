@@ -30,7 +30,7 @@ def index():
 
 @app.route('/register', methods=['GET'])
 def register_form():
-    """Show form for user signup."""
+    """New user sign in form."""
 
     return render_template("register_form.html")
 
@@ -38,22 +38,30 @@ def register_form():
 @app.route('/register', methods=['POST'])
 def register_process():
     """Process registration.
-    Uses a redirect so user does not have to leave page after registartion.
+        Uses a redirect so user does not have to leave page after registration.
         Also uses flash messages to inform user that they have successfully registered
         and displays the username which is the email that was registered."""
 
     # Get form variables
     email = request.form["email"]
     password = request.form["password"]
-    firstname = (request.form["firstname"])
+    firstname = request.form["firstname"]
     lastname = request.form["lastname"]
 
-    new_user = User(email=email, password=password, firstname=firstname, lastname=lastname)
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        flash("You're already a user. Please log in.")
+        return redirect("/login")
+
+    else:
+
+        new_user = User(email=email, password=password, firstname=firstname, lastname=lastname)
 
     db.session.add(new_user)
     db.session.commit()
 
-    flash("Thank you %s, you have been added as a user. Click the Login link to search" % email)
+    flash("Thank you %s, you have been added as a user. Go ahead and log in" % email)
     return redirect('/')
 
 ########################################################################
@@ -77,7 +85,7 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("Sorry no such user found on our system. Please check the email address or register as a new user")
+        flash("Sorry that email was not found on our system. Please check the email address or register as a new user")
         return redirect("/login")
 
     if user.password != password:
@@ -96,9 +104,16 @@ def login_process():
 def user_profile(user_id):
     """Show logged in users profile"""
 
-    user = User.query.get(user_id)
+    # user = User.query.get(user_id)
 
-    return render_template("profile.html", user=user)
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return redirect('/login')
+
+    else:
+        user = User.query.get(user_id)
+        return render_template("profile.html", user=user)
 
 ########################################################################
 
@@ -107,34 +122,49 @@ def user_profile(user_id):
 def report_form():
     """Show add new report form."""
 
-    # user = User.query.get(user_id)
-    # session["user_id"] = user.user_id
-    print session["user_id"]
+    # print session["user_id"]
 
-    return render_template("add_new_report_form.html")
+    user_id = session.get("user_id")
+
+    if not user_id:
+        flash("Sorry log in required before adding a report.")
+        return redirect('/login')
+
+    else:
+        return render_template("add_new_report_form.html")
+
+#########################################################################
 
 
-# @app.route('/addnewreport', methods=['POST'])
-# def report_process():
-#     """Process new report."""
+@app.route('/userreport', methods=['POST'])
+def report_process():
+    """Process new report."""
 
-#     # Get form variables
+    # Get form variables
 
-#     address = request.form["address"]
-#     report = request.form["report"]
-#     user_id = session["user_id"]
-#     firstname = request.form["firstname"]
-#     latitude = request.form["latitude"]
-#     longitude = request.form["longitude"]
+    address = request.form["address"]
+    report = request.form["report"]
+    user_id = session["user_id"]
+    latitude = request.form["latitude"]
+    longitude = request.form["longitude"]
 
-#     new_userreport = Userreport(address=address, report=report, user_id=user_id, firstname=firstname, latitude=latitude, longitude=longitude)
+    new_userreport = Userreport(address=address, report=report, user_id=user_id, latitude=latitude, longitude=longitude)
 
-#     db.session.add(new_userreport)
-#     db.session.commit()
+    db.session.add(new_userreport)
+    db.session.commit()
 
 #     flash("Thank you %s, your report was added. Click the Search link to search for reports" % firstname)
 
-#     # user = Userreport.query.get(user_id)
+    user_id = session.get("user_id")
+
+    # user = User.query.filter_by(email=email).first()
+    user = User.query.get(user_id)
+    print "*********************** user is %s" % user
+    userreport = Userreport.query.filter_by(user_id=user_id).all()
+
+    print "*********************** userreport is %s" % userreport
+
+    # user_id = session.get("user_id")
 
 #     userreport = Userreport.query.filter_by(user_id)
 #     print userreport
@@ -144,22 +174,21 @@ def report_form():
 #     # return redirect("/profile/%s/%s" % (user.user_id, userreport.urep_id))
 
 #     return render_template("profile.html", userreport=userreport)
-#     # return render_template("profile.html", user=user)
+    return render_template("userreport.html", userreport=userreport, user=user)
 
 #########################################################################
 
 
-@app.route('/profile/<int:user_id>/<int:urep_id>')
-def user_report(urep_id, user_id):
-    """Show logged in users reports"""
+# @app.route('/profile/<int:user_id>/<int:urep_id>')
+# def user_report(urep_id, user_id):
+#     """Show logged in users reports"""
 
-    user = User.query.get(user_id)
+#     user_id = session.get("user_id")
+#     user = User.query.get(user_id)
 
-    userreport = Userreport.query.filter_by(user_id)
+#     userreport = Userreport.query.filter_by(user_id)
 
-    session["user_id"] = user.user_id
-
-    return render_template("profile.html", userreport=userreport, user=user)
+#     return render_template("profile.html", userreport=userreport, user=user)
 
 
 # @app.route('/profile/<int:user_id>')

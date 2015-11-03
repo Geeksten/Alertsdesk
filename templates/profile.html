@@ -28,21 +28,24 @@
 
   <b><p style="color:green">Email: {{ user.email }}</p></b>
 
-  {% if user.userreports %}
-
+  
     <h3>Reports</h3>
+    <b><p style="color:blue"><a href="/addnewreport">Click here to add a new report:</a></p></b>
+
+    {% if user.userreports %}
     <ul>
     {% for report in user.userreports %}
       <li>
         {{ user.firstname }}
         added the following illness report 
         {{ user.userreports}}
+
       </li>
     {% endfor %}
     </ul>
 
     {% else %} 
-    <b><p style="color:blue">No reports found.<a href="/addnewreport">Click here to add a new report:</a></p></b>
+    <b><p style="color:blue">No reports found.
 
   {% endif %}
 </div>

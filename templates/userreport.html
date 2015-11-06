@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+  </div>
+  <br>
+
+  <div class="well spaced" style="width:97%">
+  
+    <h3>Reports</h3>
+    <ul>
+    {% for report_object in userreport_list %}
+      <li>
+        {{report_object.report}} <br>
+        {{report_object.address}}
+      </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

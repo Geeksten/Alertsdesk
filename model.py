@@ -18,7 +18,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=False)
+    email = db.Column(db.String(64), nullable=False, default='example@example.com')
     firstname = db.Column(db.String(64), nullable=False)
     lastname = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
@@ -37,8 +37,8 @@ class Userreport(db.Model):
 
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    # firstname = db.Column(db.String(64), nullable=False)
-    address = db.Column(db.String(64))
+    zipcode = db.Column(db.String(5), default='12345', nullable=False)
+    address = db.Column(db.String(64), default='123 Example Rd, CA, 12345')
     latitude = db.Column(db.String(64), nullable=False)
     longitude = db.Column(db.String(64), nullable=False)
     report = db.Column(db.String(200), nullable=False)
@@ -50,7 +50,7 @@ class Userreport(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Userreport report=%s>" % (self.report)
+        return "<Userreport zipcode=% report=%s>" % (self.zipcode, self.report)
 
 
 class Reportsymptom(db.Model):
@@ -89,7 +89,7 @@ class Symptom(db.Model):
     description = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        """Providesde helpful representation when printed."""
+        """Provides helpful representation when printed."""
 
         return "<Symptom sym_id=%s sym_name=%s description=%s>" % (
             self.sym_id, self.sym_name, self.description)

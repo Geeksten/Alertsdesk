@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <div class="collapse navbar-collapse"
+  <!-- <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                
-                <li><a href="/logout">Logout</a></li>
-            </ul>
+        
   </div>
-  <br>
+  <br> -->
 
   <div class="well spaced" style="width:97%">
                 <!-- <li><a href="/login">Login</a></li>
@@ -34,11 +31,11 @@
 
     {% if user.userreports %}
     <ul>
-    {% for report in user.userreports %}
+    {% for report_object in user.userreports %}
       <li>
         {{ user.firstname }}
         added the following illness report 
-        {{ user.userreports}}
+        for zipcode {{report_object.address}} : {{report_object.report}}
 
       </li>
     {% endfor %}

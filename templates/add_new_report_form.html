@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- user will be able to add new report using this form. find a way to retrieve userid and first name from logged in info, also find a way get user latitude and longitude from the given address -->
-<div class="collapse navbar-collapse"
+<!-- <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                
-                <li><a href="/logout">Logout</a></li>
             </ul>
   </div>
-  <br>
+  <br> -->
 
 <div class="well spaced" style="width:40%;">
 <h1> Add new report</h1>
@@ -23,11 +21,22 @@
     </div>
 
     <div class="form-group">
+    <label for="sel2">Symptom(hold shift to select more than one):</label>
+      <select multiple class="form-control" id="sel2">
+            <option value="cold">Cold</option>
+            <option value="flu">Flu</option>
+            <option value="cough">Cough</option>
+            <option value="fever">Fever</option>
+            <option value="wheezing">Wheezing</option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
         <label>
             Report
             <input type="text" name="report" class="form-control">
         </label>
-    </div>
+    </div> -->
 
     <div class="form-group">
     <label>

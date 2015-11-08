@@ -50,7 +50,7 @@ class Userreport(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Userreport zipcode=% report=%s>" % (self.zipcode, self.report)
+        return "<Userreport zipcode=%s report=%s>" % (self.zipcode, self.report)
 
 
 class Reportsymptom(db.Model):
@@ -164,6 +164,7 @@ class Fdarecall(db.Model):
             self.recall_firm, self.prod_type, self.prod_desc,
             self.dist_pattern, self.recall_city, self.recall_state,
             self.recall_country, self.recall_reason, self.date_reported)
+                    
 
 
 ##############################################################################

@@ -164,43 +164,101 @@ def report_process():
 
     print "*********************** userreport is %s" % userreport_list
 
-    # user_id = session.get("user_id")
-
-#     userreport = Userreport.query.filter_by(user_id)
-#     print userreport
-
-#     # return render_template("profile.html", user=user)
-
-#     # return redirect("/profile/%s/%s" % (user.user_id, userreport.urep_id))
-
-#     return render_template("profile.html", userreport=userreport)
     return render_template("userreport.html", userreport_list=userreport_list, user=user)
 
 #########################################################################
 
 
-# @app.route('/profile/<int:user_id>/<int:urep_id>')
-# def user_report(urep_id, user_id):
-#     """Show logged in users reports"""
+@app.route('/alerts', methods=['GET'])
+def alerts_signup_form():
+    """Show alerts sign up form."""
 
-#     user_id = session.get("user_id")
-#     user = User.query.get(user_id)
+    user_id = session.get("user_id")
 
-#     userreport = Userreport.query.filter_by(user_id)
+    if not user_id:
+        flash("Sorry log in required before signing up for alerts.")
+        return redirect('/login')
 
-#     return render_template("profile.html", userreport=userreport, user=user)
+    else:
+        return render_template("alerts_signup.html")
+
+#########################################################################
 
 
-# @app.route('/profile/<int:user_id>')
-# def user_profile(user_id):
-#     """Show logged in users profile"""
+@app.route('/alerts', methods=['POST'])
+# def alerts_process():
+#     """Process alerts sign up."""
 
-#     user = User.query.get(user_id)
+#     # Get form variables
+#     email = request.form["email"]
+#     password = request.form["password"]
+
+#     user = User.query.filter_by(email=email).first()
+
+#     if not user:
+#         flash("Sorry that email was not found on our system. Please check the email address or register as a new user")
+#         return redirect("/login")
+
+#     if user.password != password:
+#         flash("Incorrect password")
+#         return redirect("/login")
 
 #     session["user_id"] = user.user_id
 
-#     return render_template("profile.html", user=user)
+#     flash("You logged in successfully")
+#     return redirect("/profile/%s" % user.user_id)
+##########################################################################
+
+
+# @app.route('/search', methods=['POST'])
+# def search():
+#     """Process login."""
+
+#     # Get form variables
+#     email = request.form["email"]
+#     password = request.form["password"]
+
+#     user = User.query.filter_by(email=email).first()
+
+#     if not user:
+#         flash("Sorry that email was not found on our system. Please check the email address or register as a new user")
+#         return redirect("/login")
+
+#     if user.password != password:
+#         flash("Incorrect password")
+#         return redirect("/login")
+
+#     session["user_id"] = user.user_id
+
+#     flash("You logged in successfully")
+#     return redirect("/profile/%s" % user.user_id)
 #########################################################################
+
+
+@app.route("/symptom/<int:sym_id>")
+def show_symptoms(sym_id):
+    """Return page showing more information about a given symtom.
+    """
+    # user = User.query.filter_by(email=email).first()
+    symptom = Symptom.query.get(sym_id)
+    print symptom
+    return render_template("symptom_details.html",
+                           symptom=symptom)
+#########################################################################
+
+
+@app.route('/map')
+def show_map():
+    return render_template("map.html")
+
+
+#########################################################################
+
+# @app.route('/alerts')
+# def sign_up_for_alerts():
+#     pass
+
+##########################################################################
 
 
 @app.route('/logout')
@@ -213,88 +271,6 @@ def logout():
 
 
 #########################################################################
-
-
-# @app.route("/users")
-# def user_list():
-#     """Show list of users."""
-
-#     users = User.query.all()
-#     return render_template("user_list.html", users=users)
-
-########################################################################
-
-
-# @app.route("/users/<int:user_id>")
-# def user_detail(user_id):
-#     """Show info about user."""
-
-#     user = User.query.get(user_id)
-#     return render_template("user.html", user=user)
-
-#######################################################################
-
-
-# @app.route("/movies")
-# def movie_list():
-#     """Show list of movies."""
-
-#     movies = Movie.query.order_by('title').all()
-#     return render_template("movie_list.html", movies=movies)
-
-#####################################################################
-
-
-# @app.route("/movies/<int:movie_id>", methods=['GET'])
-# def movie_detail(movie_id):
-#     """Show info about movie.
-
-#     If a user is logged in, let them add/edit a rating.
-#     """
-
-#     movie = Movie.query.get(movie_id)
-
-#     user_id = session.get("user_id")
-
-#     if user_id:
-#         user_rating = Rating.query.filter_by(
-#             movie_id=movie_id, user_id=user_id).first()
-
-#     else:
-#         user_rating = None
-
-#     return render_template("movie.html",
-#                            movie=movie,
-#                            user_rating=user_rating)
-
-#######################################################################
-
-
-# @app.route("/movies/<int:movie_id>", methods=['POST'])
-# def movie_detail_process(movie_id):
-#     """Add/edit a rating."""
-
-#     # Get form variables
-#     score = int(request.form["score"])
-
-#     user_id = session.get("user_id")
-#     if not user_id:
-#         raise Exception("No user logged in.")
-
-#     rating = Rating.query.filter_by(user_id=user_id, movie_id=movie_id).first()
-
-#     if rating:
-#         rating.score = score
-#         flash("Rating updated.")
-
-#     else:
-#         rating = Rating(user_id=user_id, movie_id=movie_id, score=score)
-#         flash("Rating added.")
-#         db.session.add(rating)
-
-#     db.session.commit()
-
-#     return redirect("/movies/%s" % movie_id)
 
 
 if __name__ == "__main__":

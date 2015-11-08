@@ -12,12 +12,11 @@
 
   <div class="well spaced" style="width:97%">
   
-    <h3>Reports</h3>
+    <h3>Reports added by {{ user.email}}</h3>
     <ul>
     {% for report_object in userreport_list %}
       <li>
-        {{report_object.report}} <br>
-        {{report_object.address}}
+        for zipcode {{report_object.address}} : {{report_object.report}}
       </li>
     {% endfor %}
     </ul>

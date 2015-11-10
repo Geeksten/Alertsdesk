@@ -95,6 +95,10 @@ print ("Current time is %s" % time_now)
 print '''Weather in %s, %s, with lows of %s,
           highs of %s, humidity is %d''' % (city, cloud_cover, lows, highs, humidity_level)
 
+weather_report = '''Weather in %s, %s, with lows of %s,
+          highs of %s, humidity is %d''' % (city, cloud_cover, lows, highs, humidity_level)
+print weather_report
+
 
 
 #     artistName = jdict['results'][i].get('artistName')

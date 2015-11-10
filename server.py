@@ -257,16 +257,31 @@ def show_symptoms(sym_id):
 #enter queries
 
 
-@app.route('/illnessmap')
-def show_map():
+@app.route('/illnessmap', methods=['GET'])
+def show_illness_form():
+    '''Displays a form so user can search for illnesses by zip'''
     return render_template("illnessmap.html")
+
+
+@app.route('/illnessmap', methods=['POST'])
+def process_illness_result():
+    """Display weather conditions for given zipcode."""
+
+    # Get form variables
+    userzip = request.form.get("userzip")
+    print userzip
+    zipcode = userzip
+    print zipcode
+
+    all_reports = db.session.query(Userreport.zipcode, Userreport.report)
+    print all_reports
 
 
 #########################################################################
 
 @app.route('/weathermap', methods=['GET'])
 def show_weather_form():
-    '''Displays a form so user can search by zip'''
+    '''Displays a form so user can get weather by zip'''
 
     return render_template("weathermap.html")
 
@@ -279,6 +294,7 @@ def process_weather_result():
     api_key = 'appid=' + openweather_api
     # Get form variables
     userzip = request.form.get("userzip")
+    print userzip
 
     # openweather_api = '27300f2017feaf811a4170ce642bc5f1'
     # api_key = 'appid=' + openweather_api

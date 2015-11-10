@@ -7,6 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Userreport, Reportsymptom
 from model import Symptom, State, Staterecall, Fdarecall
+import os
 
 
 app = Flask(__name__)

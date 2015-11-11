@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Userreport, Reportsymptom
@@ -279,6 +279,14 @@ def process_illness_result():
 
 #########################################################################
 
+@app.route('/map')
+def simple():
+    """Show default map."""
+
+    return render_template("map_default.html")
+#########################################################################
+
+
 @app.route('/weathermap', methods=['GET'])
 def show_weather_form():
     '''Displays a form so user can get weather by zip'''
@@ -379,6 +387,7 @@ def process_weather_result():
               highs of %s, humidity is %d''' % (city, cloud_cover, lows, highs, humidity_level)
 
     return weather_report
+    # return render_template("weathermap.html", weather_report=weather_report)
     print weather_report
 
 

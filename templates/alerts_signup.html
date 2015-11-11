@@ -1,34 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="well spaced" style="width:40%;">
+
 <h1>Sign up for alerts</h1>
+<div class="well spaced" style="width:40%;">
 
 <form action="/alerts" method="GET">
 
     <div class="form-group">
         <label>
             Symptom
-            <select name="symptom">
+            <select class="form-control" name="symptom">
                 <option value="cold">Cold</option>
                 <option value="flu">Flu</option>
                 <option value="cough">Cough</option>
                 <option value="fever">Fever</option>
-                <option value="wheezing">Wheezing</option>
+                <option value="amoeba">Amoeba</option>
             </select>
         </label>
-        <br>
-    </div>
-
-    <!-- <div class="form-group">
-        <label>
-            First Name
-            <input type="text" name="firstname" class="form-control">
-        </label>
-    </div> -->
-
-    <div>
     <input type="submit" value="Sign up for alerts" class="btn btn-danger">
-    </div>
 
 </form>
 </div>

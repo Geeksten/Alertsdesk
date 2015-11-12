@@ -40,7 +40,7 @@ def display_default_map():
     print "There should be a map here"
     print "There should be a map here"
 
-    return render_template("map_default.html")
+    return render_template("map_geodefault.html")
 ############################################################################
 
 

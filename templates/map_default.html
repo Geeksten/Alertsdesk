@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
 {% block head %}
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnQgK_c9CKhgTB6LBI_coA176tW43IYr0&callback=initMap">
+    </script>
 
     <style>
-        html, body, #weather-map {
-            height: 750
-            px;
+        html, body {
             margin: 0px;
+        }
+
+        #weather-map {
+          height: 750px;
         }
 
         .window-content {
             color: #04162b;
         }
     </style>
-
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnQgK_c9CKhgTB6LBI_coA176tW43IYr0&callback=initMap">
-    </script>
+    
+{% endblock %}
+{% block content %}
 
     <script>
-
         console.log("about to init!");
+
         function initMap() {
           console.log("In initMap");
           var myLatLng = {lat: 32, lng: -122};
@@ -31,12 +35,9 @@
           });
         }
         console.log("there should be a map");
-        google.maps.event.addDomListener(window, 'load', initMap);
+      google.maps.event.addDomListener(window,'load', initMap);
     </script>
 
-{% endblock %}
+  <div id="weather-map"></div>
 
-
-{% block content %}
-    <div id="weather-map"></div>
 {% endblock %}

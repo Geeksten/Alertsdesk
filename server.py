@@ -24,12 +24,23 @@ openweather_api = os.environ['openweather_api']
 app.jinja_env.undefined = StrictUndefined
 
 
+# @app.route('/')
+# def index():
+#     """Homepage."""
+
+#     return render_template("index.html")
+
+############################################################################
+
 @app.route('/')
-def index():
-    """Homepage."""
+def display_default_map():
+    """Show default map."""
+    print "There should be a map here"
+    print "There should be a map here"
+    print "There should be a map here"
+    print "There should be a map here"
 
-    return render_template("index.html")
-
+    return render_template("map_default.html")
 ############################################################################
 
 
@@ -279,11 +290,12 @@ def process_illness_result():
 
 #########################################################################
 
-@app.route('/map')
-def simple():
-    """Show default map."""
+# @app.route('/map')
+# def display_default_map():
+#     """Show default map."""
+#     print "There should be a map here"
 
-    return render_template("map_default.html")
+#     return render_template("map_default.html")
 #########################################################################
 
 
@@ -391,14 +403,7 @@ def process_weather_result():
     print weather_report
 
 
-
-    #########################################################################
-# @app.route('/alerts')
-# def sign_up_for_alerts():
-#     pass
-
 ##########################################################################
-
 
 @app.route('/logout')
 def logout():

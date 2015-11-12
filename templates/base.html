@@ -71,6 +71,10 @@
           color:white;
         }
   </style>
+
+    {% block head %}
+      <!-- put extra CSS/JS here -->
+  {% endblock %}
 </head>
 <body>
   <nav class="navbar navbar-inverse" style="margin-bottom: 0px">
@@ -126,11 +130,11 @@
     </div>
 
   {% endfor %}
-
-{% block content %} put your content here 
+</div>
+{% block content %} 
 
 {% endblock %}
-</div>
+
 
 <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

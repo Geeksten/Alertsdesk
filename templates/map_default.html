@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+
+    <style>
+        html, body, #weather-map {
+            height: 750
+            px;
+            margin: 0px;
+        }
+
+        .window-content {
+            color: #04162b;
+        }
+    </style>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnQgK_c9CKhgTB6LBI_coA176tW43IYr0&callback=initMap">
+    </script>
+
+    <script>
+
+        console.log("about to init!");
+        function initMap() {
+          console.log("In initMap");
+          var myLatLng = {lat: 32, lng: -122};
+          console.log("made a center");
+          // Create a map object and specify the DOM element for display.
+          var map = new google.maps.Map(document.getElementById('weather-map'), {
+            center: myLatLng,
+            zoom: 5,
+          });
+        }
+        console.log("there should be a map");
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+    <div id="weather-map"></div>
+{% endblock %}

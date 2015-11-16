@@ -4,6 +4,7 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_sqlalchemy import SQLAlchemy
 
 from model import connect_to_db, db, User, Userreport, Reportsymptom
 from model import Symptom, State, Staterecall, Fdarecall
@@ -157,14 +158,14 @@ def report_process():
     """Process new report."""
 
     # Get form variables
-
+    zipcode = request.form["zipcode"]
     address = request.form["address"]
     report = request.form["report"]
     user_id = session["user_id"]
     latitude = request.form["latitude"]
     longitude = request.form["longitude"]
 
-    new_userreport = Userreport(address=address, report=report, user_id=user_id, latitude=latitude, longitude=longitude)
+    new_userreport = Userreport(address=address, zipcode=zipcode, report=report, user_id=user_id, latitude=latitude, longitude=longitude)
 
     db.session.add(new_userreport)
     db.session.commit()
@@ -203,7 +204,7 @@ def alerts_signup_form():
 #TO DO COMPLETE ROUTE
 
 
-@app.route('/alerts', methods=['POST'])
+# @app.route('/alerts', methods=['POST'])
 # def alerts_process():
 #     """Process alerts sign up."""
 
@@ -268,10 +269,10 @@ def show_symptoms(sym_id):
 #enter queries
 
 
-@app.route('/illnessmap', methods=['GET'])
+@app.route('/illnessform', methods=['GET'])
 def show_illness_form():
     '''Displays a form so user can search for illnesses by zip'''
-    return render_template("illnessmap.html")
+    return render_template("illness_form.html")
 
 
 @app.route('/illnessmap', methods=['POST'])
@@ -280,13 +281,91 @@ def process_illness_result():
 
     # Get form variables
     userzip = request.form.get("userzip")
-    print userzip
+    # print ("userzip is %s") % userzip
     zipcode = userzip
     print zipcode
 
-    all_reports = db.session.query(Userreport.zipcode, Userreport.report)
-    print all_reports
+    # all_reports = db.session.query(Userreport.zipcode, Userreport.report)
+    all_reports = db.session.query(Userreport.report)
+    justzip_list = all_reports.filter(Userreport.zipcode == zipcode).all()
+    print justzip_list
+    print type(justzip_list)
+    # for r in justzip:
+    #     print r.report
+    #    ...:
+    # fever, sweats
+    # chills
+    # severe headache
+    # chills
+    # fever, sweats
+    # flu
+    # rash
+    # chills
+    # sneezing
+    # cold, flu, cough
 
+    return render_template("illnessmap.html", zipcode=zipcode, justzip_list=justzip_list)
+
+# ##########################################################################
+
+
+# @app.route('/illness-trends.json')
+# def illness_trends_data():
+#     """Return trends of illnesses."""
+
+#     data_dict = {
+#         "labels": ["January", "February", "March", "April", "May", "June", "July"],
+#         "datasets": [
+#             {
+#                 "label": "Colds",
+#                 "fillColor": "rgba(220,220,220,0.2)",
+#                 "strokeColor": "rgba(220,220,220,1)",
+#                 "pointColor": "rgba(220,220,220,1)",
+#                 "pointStrokeColor": "#fff",
+#                 "pointHighlightFill": "#fff",
+#                 "pointHighlightStroke": "rgba(220,220,220,1)",
+#                 "data": [65, 59, 80, 81, 56, 55, 40]
+#             },
+#             {
+#                 "label": "Flu",
+#                 "fillColor": "rgba(151,187,205,0.2)",
+#                 "strokeColor": "rgba(151,187,205,1)",
+#                 "pointColor": "rgba(151,187,205,1)",
+#                 "pointStrokeColor": "#fff",
+#                 "pointHighlightFill": "#fff",
+#                 "pointHighlightStroke": "rgba(151,187,205,1)",
+#                 "data": [28, 48, 40, 19, 86, 27, 90]
+#             }
+#         ]
+#     }
+#     return jsonify(data_dict)
+
+########################################################################
+
+
+# @app.route('/sampleill')
+# def map():
+#     """Show map of illnesses.
+#     Use this to test the markers for info about illnesses"""
+
+#     return render_template("illnessmarker_sample.html")
+
+
+######################################################################
+# @app.route('/sampleill.json')
+# def illness_info():
+#     """JSON information about illness trends."""
+
+#     userreports = {
+#         userreport.marker_id: {
+#             "Id": userreport.urep_id,
+#             "latitude": userreport.latitude,
+#             "longitude": userreport.longitude,
+#             "report": userreport.report
+#         }
+#         for userreport in Userreport.query.limit(50)}
+
+#     return jsonify(userreports)
 
 #########################################################################
 
@@ -321,7 +400,8 @@ def process_weather_result():
 
     # print api_key
 
-    # url2 = 'http://api.openweathermap.org/data/2.5/weather?appid=27300f2017feaf811a4170ce642bc5f1&zip=33511,us'
+    # url2 = 'http://api.openweathermap.org/data/2.5/weather?
+    # appid=27300f2017feaf811a4170ce642bc5f1&zip=33511,us'
     shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
     # print shortened_url
     # final_url = 'http://api.openweathermap.org/data/2.5/weather?{}'.format(api_key)
@@ -330,7 +410,7 @@ def process_weather_result():
     # print "please type in your zipcode"
     # zipcode = '33511'  # hardcode zip for now
     # zipcode = request.form.get('user_zip')
-    payload = "&" + 'zip=' + userzip + ',us'
+    payload = "&" + 'zip=' + userzip + ',us' + "&units=imperial"
     # print payload
 
     r = requests.get(shortened_url, params=api_key + payload)
@@ -366,7 +446,7 @@ def process_weather_result():
     # print city
 
     coordinates = jdict['coord']
-    # print coordinates
+    print coordinates
 
     weather_conditions = jdict['weather']
     # print weather_conditions
@@ -385,6 +465,8 @@ def process_weather_result():
     humidity_level = atmospheric_conditions['humidity']
     # print humidity_level
 
+    temperature = atmospheric_conditions['temp']
+
     lows = atmospheric_conditions['temp_min']
     # print lows
 
@@ -393,10 +475,10 @@ def process_weather_result():
 
     print ("Current time is %s" % time_now)
 
-    print '''Weather in %s, %s, with lows of %s,
-              highs of %s, humidity is %d''' % (city, cloud_cover, lows, highs, humidity_level)
-    weather_report = '''Weather in %s, %s, with lows of %s,
-              highs of %s, humidity is %d''' % (city, cloud_cover, lows, highs, humidity_level)
+    print '''Weather in %s, %s, temperature is %s, with lows of %s,
+              highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
+    weather_report = '''Weather in %s, %s, temperature is %s, with lows of %s,
+              highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
 
     return weather_report
     # return render_template("weathermap.html", weather_report=weather_report)

@@ -12,6 +12,11 @@
             color: #04162b;
         }
     </style>
+
+    {% endblock %}
+    
+    {% block content %}
+    <div id="weather-map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script>
         // Note: This example requires that you consent to location sharing when
@@ -35,11 +40,17 @@
                             position.coords.latitude,
                             position.coords.longitude);
 
-                    var infowindow = new google.maps.InfoWindow({
-                        map: map,
-                        position: pos,
-                        content: 'You are here!'
-                    });
+                    // var infowindow = new google.maps.InfoWindow({
+                    //     map: map,
+                    //     position: pos,
+                    //     content: 'You are here!'
+                    // });
+
+                    var marker = new google.maps.Marker({
+                      position: pos,
+                      map: map,
+                      title: 'Home marker!'
+  });
 
                     map.setCenter(pos);
                 }, function () {
@@ -75,9 +86,4 @@
     </script>
 
 
-{% endblock %}
-
-
-{% block content %}
-    <div id="weather-map"></div>
 {% endblock %}

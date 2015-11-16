@@ -14,7 +14,9 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-
+   {% block head %}
+      <!-- put extra CSS/JS here -->
+  {% endblock %}
   <style>
 
         h1, h2, h3, .navbar-brand { font-family: "Tahoma"; }
@@ -32,7 +34,7 @@
 
         html, body {
           width: 100%;
-          height: 100%;
+          height: 300px;
           margin: 0;
           background-color: olive;
         }
@@ -64,10 +66,7 @@
         }
   </style>
 
-    {% block head %}
-      <!-- put extra CSS/JS here -->
-  {% endblock %}
-</head>
+   </head>
 
 <body>
   <nav class="navbar navbar-inverse" style="margin-bottom: 0px">
@@ -94,7 +93,7 @@
 
         <ul class="nav navbar-nav">
           <li><a href="/weathermap">Weather Map</a></li>
-          <li><a href="/illnessmap">Illness Map</a></li>
+          <li><a href="/illnessform">Illness Map</a></li>
           </ul>
 
         <!--The items on the right side of the nav bar-->

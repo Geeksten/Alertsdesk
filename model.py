@@ -37,8 +37,8 @@ class Userreport(db.Model):
 
     urep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    zipcode = db.Column(db.String(5), default='12345', nullable=False)
-    address = db.Column(db.String(64), default='123 Example Rd, CA, 12345')
+    address = db.Column(db.String(64), default='San Francisco, CA')
+    zipcode = db.Column(db.String(5), default='94103', nullable=False)
     latitude = db.Column(db.String(64), nullable=False)
     longitude = db.Column(db.String(64), nullable=False)
     report = db.Column(db.String(200), nullable=False)
@@ -164,7 +164,7 @@ class Fdarecall(db.Model):
             self.recall_firm, self.prod_type, self.prod_desc,
             self.dist_pattern, self.recall_city, self.recall_state,
             self.recall_country, self.recall_reason, self.date_reported)
-                    
+         
 
 
 ##############################################################################

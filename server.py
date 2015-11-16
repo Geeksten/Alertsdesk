@@ -5,6 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
 from model import connect_to_db, db, User, Userreport, Reportsymptom
 from model import Symptom, State, Staterecall, Fdarecall
@@ -309,36 +310,74 @@ def process_illness_result():
 # ##########################################################################
 
 
-# @app.route('/illness-trends.json')
-# def illness_trends_data():
-#     """Return trends of illnesses."""
+@app.route('/illness-trends')
+def illness_trends():
+    """Show illness charts"""
 
-#     data_dict = {
-#         "labels": ["January", "February", "March", "April", "May", "June", "July"],
-#         "datasets": [
-#             {
-#                 "label": "Colds",
-#                 "fillColor": "rgba(220,220,220,0.2)",
-#                 "strokeColor": "rgba(220,220,220,1)",
-#                 "pointColor": "rgba(220,220,220,1)",
-#                 "pointStrokeColor": "#fff",
-#                 "pointHighlightFill": "#fff",
-#                 "pointHighlightStroke": "rgba(220,220,220,1)",
-#                 "data": [65, 59, 80, 81, 56, 55, 40]
-#             },
-#             {
-#                 "label": "Flu",
-#                 "fillColor": "rgba(151,187,205,0.2)",
-#                 "strokeColor": "rgba(151,187,205,1)",
-#                 "pointColor": "rgba(151,187,205,1)",
-#                 "pointStrokeColor": "#fff",
-#                 "pointHighlightFill": "#fff",
-#                 "pointHighlightStroke": "rgba(151,187,205,1)",
-#                 "data": [28, 48, 40, 19, 86, 27, 90]
-#             }
-#         ]
-#     }
-#     return jsonify(data_dict)
+    return render_template("illness_chart.html")
+
+
+@app.route('/illness-trends.json')
+def illness_trends_data():
+    """Return trends of illnesses as a chart."""
+
+    cold = db.session.query(func.count(Userreport.report.like('%cold%'))).all()
+    print cold
+
+    #cold, cough, flu, fever, sweats, chills,  sneezing, severe headache
+    data_list_of_dicts = {
+        'userreports': [
+            {
+                "value": cold,
+                "color": "#F7464A",
+                "highlight": "#FF5A5E",
+                "label": "cold"
+            },
+            {
+                "value": 50,
+                "color": "#46BFBD",
+                "highlight": "#5AD3D1",
+                "label": "cough"
+            },
+            {
+                "value": 100,
+                "color": "#FDB45C",
+                "highlight": "#FFC870",
+                "label": "flu"
+            },
+            {
+                "value": 300,
+                "color": "#F7464A",
+                "highlight": "#FF5A5E",
+                "label": "fever"
+            },
+            {
+                "value": 50,
+                "color": "#46BFBD",
+                "highlight": "#5AD3D1",
+                "label": "sweats"
+            },
+            {
+                "value": 100,
+                "color": "#FDB45C",
+                "highlight": "#FFC870",
+                "label": "chills"
+            },
+            {
+                "value": 50,
+                "color": "#46BFBD",
+                "highlight": "#5AD3D1",
+                "label": "sneezing"
+            },
+            {
+                "value": 100,
+                "color": "#FDB45C",
+                "highlight": "#FFC870",
+                "label": "severe headaches"
+            }
+        ]
+    }
+    return jsonify(data_list_of_dicts)
 
 ########################################################################
 

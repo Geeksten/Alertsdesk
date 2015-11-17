@@ -390,6 +390,7 @@ def illness_trends_data():
     return jsonify(data_list_of_dicts)
 
 ########################################################################
+#comment this out for now
 
 
 @app.route('/illnessmarkers')
@@ -405,7 +406,7 @@ def illnessmarkers_info():
 
     userreports = {
         userreport.urep_id: {
-            "latitide": userreport.latitude,
+            "latitude": userreport.latitude,
             "longitude": userreport.longitude,
             "report": userreport.report
         }
@@ -413,6 +414,15 @@ def illnessmarkers_info():
         for userreport in Userreport.query.limit(50)}
 
     return jsonify(userreports)
+#######################################################################
+
+# #Try a different way to display the markers
+# @app.route('/markers')
+# def markers():
+#     """Show map with markers."""
+
+#     return render_template("markers_map.html", marker_coords=marker_coords)
+
 ########################################################################
 
 # @app.route('/sampleill')

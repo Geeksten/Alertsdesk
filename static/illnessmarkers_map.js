@@ -2,7 +2,7 @@ var map;
 
 function initialize() {
     var mapOptions = {
-        zoom: 15
+        zoom: 5
     };
     map = new google.maps.Map(
             document.getElementById('illness-markersmap'),
@@ -74,23 +74,24 @@ function initialize() {
       // JSON looks like:
       // {
       // "1": {
-      //    "urepId": "1",
       //      "latitide": "37.7749295",
       //      "longitude": "-122.4194155",
       //      "report": 
       //   },...
       // }
-
+    console.log(userreports);
     var userreport, marker, html;
 
     for (var key in userreports) {
           userreport = userreports[key];
-
+          console.log(userreport);
+          console.log(userreport.latitude);
+          console.log(userreport.longitude);
           // Define the marker
-          marker = new google.maps.Marker({
-              position: new google.maps.LatLng(userreport.latitude, userreport.Longitude),
+         marker = new google.maps.Marker({
+              position: new google.maps.LatLng(userreport.latitude, userreport.longitude),
               map: map,
-              title: 'Report ID: ' + userreport.urep_id,
+              title: 'Report ID: ' + userreport.report,
               icon: '/static/img/pinkpin.png'
           });
 

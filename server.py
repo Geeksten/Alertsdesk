@@ -321,14 +321,24 @@ def illness_trends():
 def illness_trends_data():
     """Return trends of illnesses as a chart."""
 
-    cold = db.session.query(func.count(Userreport.report.like('%cold%'))).all()
-    print cold
+    # all_reports = db.session.query(Userreport.report)
+    # cold = all_reports.filter(Userreport.report.like('%cold%'))
+    # all_reports = db.session.query(func.count(Userreport.report))
+
+    # all_cold = db.session.query(func.count(Userreport.report.like('%cold%'))).all()
+
+    # coldcount = Userreport.query.filter(Userreport.report.like("%cold%")).all()
+    # print coldcount
+    # # #iterate over each item in the list
+    # # for c in cold:
+    # #     coldcount = c[0]
+    # #     return coldcount
 
     #cold, cough, flu, fever, sweats, chills,  sneezing, severe headache
     data_list_of_dicts = {
         'userreports': [
             {
-                "value": cold,
+                "value": 300,
                 "color": "#F7464A",
                 "highlight": "#FF5A5E",
                 "label": "cold"
@@ -381,6 +391,29 @@ def illness_trends_data():
 
 ########################################################################
 
+
+@app.route('/illnessmarkers')
+def illnessmarkers():
+    """Show map of illnesses with markers."""
+
+    return render_template("illnessmarkers_map.html")
+
+
+@app.route('/illnessmarkers.json')
+def illnessmarkers_info():
+    """JSON information about bears."""
+
+    userreports = {
+        userreport.urep_id: {
+            "latitide": userreport.latitude,
+            "longitude": userreport.longitude,
+            "report": userreport.report
+        }
+
+        for userreport in Userreport.query.limit(50)}
+
+    return jsonify(userreports)
+########################################################################
 
 # @app.route('/sampleill')
 # def map():

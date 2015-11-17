@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block head %}
+
+    <title>Illnessmarker_trend</title>
+    <style>
+        html, body, #illnesstrends-map {
+            height: 500px;
+            margin: 0;
+        }
+
+        .gm-style-iw {
+            color: #04162b;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    
+
+
+{% endblock %}
+
+
+{% block content %}
+
+<script>
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see a blank space instead of the map, this
+        // is probably because you have denied permission for location sharing.
+
+        var map;
+
+        function initialize() {
+            var mapOptions = {
+                zoom: 15
+            };
+            map = new google.maps.Map(
+                    document.getElementById('illnesstrends-map'),
+                    mapOptions);
+
+            // Try HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude);
+
+                    // var infowindow = new google.maps.InfoWindow({
+                    //     map: map,
+                    //     position: pos,
+                    //     content: 'You are here!'
+                    // });
+
+
+                    var marker = new google.maps.Marker({
+                      position: pos,
+                      map: map,
+                      title: 'jsonresults here!'
+                    });
+
+                    map.setCenter(pos);
+                }, function () {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+        }
+
+        function handleNoGeolocation(errorFlag) {
+            var content;
+
+            if (errorFlag) {
+                content = "Error: The Geolocation service failed.";
+            } else {
+                content = "Error: Your browser doesn't support geolocation.";
+            }
+
+            var options = {
+                map: map,
+                position: new google.maps.LatLng(32, -122),
+                content: content
+            };
+
+            var infowindow = new google.maps.InfoWindow(options);
+            map.setCenter(options.position);
+        }
+    // Define global infoWindow
+  // If you do this inside the loop where you retrieve the json,
+  // the windows do not automatically close when a new marker is clicked
+  // and you end up with a bunch of windows opened at the same time.
+  // What this does is create one infowindow and we replace the content
+  // inside for each marker.
+  var infoWindow = new google.maps.InfoWindow({
+      width: 150
+  });
+  // Retrieving the information with AJAX
+  $.get('/sampleill.json', function (userreports) {
+      // Attach markers to each bear location in returned JSON
+      // JSON looks like:
+      console.log (userreports)
+      // reports = {
+      //   userreport.urep_id: {
+      //       "Id": userreport.urep_id,
+      //       "latitude": userreport.latitude,
+      //       "longitude": userreport.longitude,
+      //       "report": userreport.report
+      //   } for userreport in userreports
+    // }
+      // {
+      //  "1": {
+      //    "urep_id": "1",
+      //    "latitude": userreport.latitude,
+      //    "longitude": userreport.longitude,
+      //    "report": userreport.report
+      //   },...
+      // }
+      var userreport, marker, html;
+
+      for (var key in userreports) {
+          userreport = userreports[key];
+
+          // Define the marker
+          marker = new google.maps.Marker({
+              position: new google.maps.LatLng(userreport.latitude, userreport.longitude),
+              map: map,
+              title: 'Report ID: ' + userreport.urep_id,
+              // icon: '/static/img/polar.png'
+          });
+
+          html = (
+              '<div class="window-content">' +
+                  '<img src="/static/img/polarbear.jpg" alt="polarbear" style="width:150px;" class="thumbnail">' +
+                  '<p><b>Lat: </b>' + userreport.latitude + '</p>' +
+                  '<p><b>Long: </b>' + userreport.longitude + '</p>' +
+                  '<p><b>Report: </b>' + userreport.report + '</p>' +
+              '</div>');
+
+          // Inside the loop we call bindInfoWindow passing it the marker,
+          // map, infoWindow and contentString
+          bindInfoWindow(marker, map, infoWindow, html);
+      }
+
+  });
+
+  // This function is outside the for loop.
+  // When a marker is clicked it closes any currently open infowindows
+  // Sets the content for the new marker with the content passed through
+  // then it open the infoWindow with the new content on the marker that's clicked
+  function bindInfoWindow(marker, map, infoWindow, html) {
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.close();
+          infoWindow.setContent(html);
+          infoWindow.open(map, marker);
+      });
+  }
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+    
+{% endblock %}

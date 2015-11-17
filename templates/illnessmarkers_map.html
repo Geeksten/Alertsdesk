@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block head %}
+
+<title>Illness Density map</title>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+     <!-- <script src="/static/mapstyles.js"></script> -->
+    <script src="/static/illnessmarkers_map.js"></script>
+
+    <style>
+        html, body, #illness-markersmap {
+            height: 500px;
+            margin: 0;
+        }
+
+
+        .gm-style-iw {
+            color: #04162b;
+        }
+    </style>
+    
+
+{% endblock %}
+
+
+{% block content %}
+    <div id="illness-markersmap"></div>
+{% endblock %}

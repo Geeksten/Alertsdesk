@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+  .illness-chart {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .chart-legend li span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+  }
+
+  body {
+      padding-top: 50px;
+      font-family: 'Raleway', sans-serif;
+  }
+
+  h2 {
+      text-align: left;
+      margin-bottom: 2em;
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+  <h2> Illness trends </h2>
+
+  <div class="illness-chart">
+    <canvas id="donutChart"></canvas>
+    <div id="donutLegend" class="chart-legend"></div>
+  </div>
+
+  <script>
+    var options = {
+      responsive: true
+    };
+
+    // Make Donut Chart of percent of different types of Illnesses
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+
+    $.get("/illness-trends.json", function (data) {
+      var myDonutChart = new Chart(ctx_donut).Doughnut(data.userreports, options);
+      $('#donutLegend').html(myDonutChart.generateLegend());
+    });
+  </script>
+
+{% endblock %}

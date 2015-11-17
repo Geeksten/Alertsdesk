@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block head %}
+
+    <title>Geolocation</title>
+    <style>
+        html, body, #illness-map {
+            height: 500px;
+            margin: 0;
+        }
+
+        .gm-style-iw {
+            color: #04162b;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Illness map</h1>
+    
+    <div class="form-group">    
+        <form action="/illnessmap" method="POST">
+            <label>
+            Enter your zipcode
+            <input type="text" name="zipcode" class="form-control">
+            </label>
+            
+            <input type="submit" value="Submit" class="btn btn-danger">
+        </form>
+    </div>
+
+    <div class="well spaced" style="width:97%">
+      
+    <h3>Reports for {{zipcode}}</h3>
+    <ul>
+    {% for report_object in justzip_list %}
+        <li>
+        {{report_object.report}}
+        </li>
+    </ul>
+    {% endfor %}
+    </div>
+<div id="illness-map"></div>
+<script>
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see a blank space instead of the map, this
+        // is probably because you have denied permission for location sharing.
+
+        var map;
+
+        function initialize() {
+            var mapOptions = {
+                zoom: 15
+            };
+            map = new google.maps.Map(
+                    document.getElementById('illness-map'),
+                    mapOptions);
+
+            // Try HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude);
+
+                    // var infowindow = new google.maps.InfoWindow({
+                    //     map: map,
+                    //     position: pos,
+                    //     content: 'You are here!'
+                    // });
+
+                    var marker = new google.maps.Marker({
+                      position: pos,
+                      map: map,
+                      title: 'jsonresults here!'
+  });
+
+                    map.setCenter(pos);
+                }, function () {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+        }
+
+        function handleNoGeolocation(errorFlag) {
+            var content;
+
+            if (errorFlag) {
+                content = "Error: The Geolocation service failed.";
+            } else {
+                content = "Error: Your browser doesn't support geolocation.";
+            }
+
+            var options = {
+                map: map,
+                position: new google.maps.LatLng(32, -122),
+                content: content
+            };
+
+            var infowindow = new google.maps.InfoWindow(options);
+            map.setCenter(options.position);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+     
+{% endblock %}

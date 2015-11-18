@@ -306,13 +306,13 @@ def illness_trends_data():
     # justzip_12345 = all_reports.filter(Userreport.zipcode ==12345)
     all_reports = db.session.query(Userreport.report)
     cold = all_reports.filter(Userreport.report.like('%cold%')).count()
-    cough = all_reports.filter(Userreport.report.like('%cold%')).count()
-    flu = all_reports.filter(Userreport.report.like('%cold%')).count()
-    fever = all_reports.filter(Userreport.report.like('%cold%')).count()
-    sweats = all_reports.filter(Userreport.report.like('%cold%')).count()
-    chills = all_reports.filter(Userreport.report.like('%cold%')).count()
-    sneezing = all_reports.filter(Userreport.report.like('%cold%')).count()
-    severeheadache = all_reports.filter(Userreport.report.like('%cold%')).count()
+    cough = all_reports.filter(Userreport.report.like('%cough%')).count()
+    flu = all_reports.filter(Userreport.report.like('%flu%')).count()
+    fever = all_reports.filter(Userreport.report.like('%fever%')).count()
+    sweats = all_reports.filter(Userreport.report.like('%sweats%')).count()
+    chills = all_reports.filter(Userreport.report.like('%chills%')).count()
+    sneezing = all_reports.filter(Userreport.report.like('%sneezing%')).count()
+    headache = all_reports.filter(Userreport.report.like('%headache%')).count()
     #cold, cough, flu, fever, sweats, chills,  sneezing, severeheadache
     data_list_of_dicts = {
         'userreports': [
@@ -359,7 +359,7 @@ def illness_trends_data():
                 "label": "sneezing"
             },
             {
-                "value": severeheadache,
+                "value": headache,
                 "color": "#FDB45C",
                 "highlight": "#FFC870",
                 "label": "severe headaches"

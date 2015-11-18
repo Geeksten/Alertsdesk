@@ -227,31 +227,7 @@ def alerts_signup_form():
 
 #     flash("You logged in successfully")
 #     return redirect("/profile/%s" % user.user_id)
-##########################################################################
 
-
-# @app.route('/search', methods=['POST'])
-# def search():
-#     """Process login."""
-
-#     # Get form variables
-#     email = request.form["email"]
-#     password = request.form["password"]
-
-#     user = User.query.filter_by(email=email).first()
-
-#     if not user:
-#         flash("Sorry that email was not found on our system. Please check the email address or register as a new user")
-#         return redirect("/login")
-
-#     if user.password != password:
-#         flash("Incorrect password")
-#         return redirect("/login")
-
-#     session["user_id"] = user.user_id
-
-#     flash("You logged in successfully")
-#     return redirect("/profile/%s" % user.user_id)
 #########################################################################
 
 
@@ -323,64 +299,67 @@ def illness_trends_data():
 
     # all_reports = db.session.query(Userreport.report)
     # cold = all_reports.filter(Userreport.report.like('%cold%'))
-    # all_reports = db.session.query(func.count(Userreport.report))
-
-    # all_cold = db.session.query(func.count(Userreport.report.like('%cold%'))).all()
-
-    # coldcount = Userreport.query.filter(Userreport.report.like("%cold%")).all()
-    # print coldcount
-    # # #iterate over each item in the list
-    # # for c in cold:
-    # #     coldcount = c[0]
-    # #     return coldcount
-
-    #cold, cough, flu, fever, sweats, chills,  sneezing, severe headache
+    # cold.all()
+    # [(u'cold, flu, cough'), (u'cold, flu, cough')]
+    #cold.count()
+    # 2
+    # justzip_12345 = all_reports.filter(Userreport.zipcode ==12345)
+    all_reports = db.session.query(Userreport.report)
+    cold = all_reports.filter(Userreport.report.like('%cold%')).count()
+    cough = all_reports.filter(Userreport.report.like('%cold%')).count()
+    flu = all_reports.filter(Userreport.report.like('%cold%')).count()
+    fever = all_reports.filter(Userreport.report.like('%cold%')).count()
+    sweats = all_reports.filter(Userreport.report.like('%cold%')).count()
+    chills = all_reports.filter(Userreport.report.like('%cold%')).count()
+    sneezing = all_reports.filter(Userreport.report.like('%cold%')).count()
+    severeheadache = all_reports.filter(Userreport.report.like('%cold%')).count()
+    #cold, cough, flu, fever, sweats, chills,  sneezing, severeheadache
     data_list_of_dicts = {
         'userreports': [
             {
-                "value": 300,
+                "value": cold,
                 "color": "#F7464A",
                 "highlight": "#FF5A5E",
                 "label": "cold"
             },
             {
-                "value": 50,
+                "value": cough,
                 "color": "#46BFBD",
                 "highlight": "#5AD3D1",
                 "label": "cough"
             },
             {
-                "value": 100,
+                "value": flu,
                 "color": "#FDB45C",
                 "highlight": "#FFC870",
                 "label": "flu"
             },
             {
-                "value": 300,
+                "value": fever,
                 "color": "#F7464A",
                 "highlight": "#FF5A5E",
                 "label": "fever"
             },
             {
-                "value": 50,
+                "value": sweats,
                 "color": "#46BFBD",
                 "highlight": "#5AD3D1",
                 "label": "sweats"
             },
             {
-                "value": 100,
+                "value": chills,
                 "color": "#FDB45C",
                 "highlight": "#FFC870",
                 "label": "chills"
             },
             {
-                "value": 50,
+                "value": sneezing,
                 "color": "#46BFBD",
                 "highlight": "#5AD3D1",
                 "label": "sneezing"
             },
             {
-                "value": 100,
+                "value": severeheadache,
                 "color": "#FDB45C",
                 "highlight": "#FFC870",
                 "label": "severe headaches"
@@ -390,19 +369,18 @@ def illness_trends_data():
     return jsonify(data_list_of_dicts)
 
 ########################################################################
-#comment this out for now
 
 
 @app.route('/illnessmarkers')
 def illnessmarkers():
-    """Show map of illnesses with markers."""
+    """Show map of illnesses with markers. Use this route to show users who is sick in their area using pins"""
 
     return render_template("illnessmarkers_map.html")
 
 
 @app.route('/illnessmarkers.json')
 def illnessmarkers_info():
-    """JSON information about bears."""
+    """JSON information about markers that will be parsed to the map."""
 
     userreports = {
         userreport.urep_id: {
@@ -414,49 +392,7 @@ def illnessmarkers_info():
         for userreport in Userreport.query.limit(50)}
 
     return jsonify(userreports)
-#######################################################################
 
-# #Try a different way to display the markers
-# @app.route('/markers')
-# def markers():
-#     """Show map with markers."""
-
-#     return render_template("markers_map.html", marker_coords=marker_coords)
-
-########################################################################
-
-# @app.route('/sampleill')
-# def map():
-#     """Show map of illnesses.
-#     Use this to test the markers for info about illnesses"""
-
-#     return render_template("illnessmarker_sample.html")
-
-
-######################################################################
-# @app.route('/sampleill.json')
-# def illness_info():
-#     """JSON information about illness trends."""
-
-#     userreports = {
-#         userreport.marker_id: {
-#             "Id": userreport.urep_id,
-#             "latitude": userreport.latitude,
-#             "longitude": userreport.longitude,
-#             "report": userreport.report
-#         }
-#         for userreport in Userreport.query.limit(50)}
-
-#     return jsonify(userreports)
-
-#########################################################################
-
-# @app.route('/map')
-# def display_default_map():
-#     """Show default map."""
-#     print "There should be a map here"
-
-#     return render_template("map_default.html")
 #########################################################################
 
 

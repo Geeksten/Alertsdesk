@@ -91,7 +91,7 @@ function initialize() {
          marker = new google.maps.Marker({
               position: new google.maps.LatLng(userreport.latitude, userreport.longitude),
               map: map,
-              title: 'Report ID: ' + userreport.report,
+              title: 'Alert: ' + userreport.report,
               icon: '/static/img/pinkpin.png'
           });
 
@@ -100,7 +100,7 @@ function initialize() {
               '<div class="window-content">' +
                   '<p><b>Latitude: </b>' + userreport.latitude + '</p>' +
                   '<p><b>Longitude: </b>' + userreport.longitude + '</p>' +
-                  '<p><b>Report: </b>' + userreport.report + '</p>' +
+                  '<p><b>Alert: </b>' + userreport.report + '</p>' +
     
               '</div>');
 

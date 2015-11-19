@@ -1,20 +1,25 @@
 """Alerts."""
 
+import json
+# import jinja debugging tool
 from jinja2 import StrictUndefined
-
+# import flask tools
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
-
+# import geopy tools for lat/long derivation from address data
+from geopy.geocoders import GoogleV3
+# import database & classes from model.py
 from model import connect_to_db, db, User, Userreport, Reportsymptom
 from model import Symptom, State, Staterecall, Fdarecall
 import requests
 import pprint
 from datetime import datetime
+#import os so we can use the secrets file
 import os
 
-
+# make it a Flask app
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -26,23 +31,23 @@ openweather_api = os.environ['openweather_api']
 app.jinja_env.undefined = StrictUndefined
 
 
-# @app.route('/')
-# def index():
-#     """Homepage."""
+@app.route('/')
+def index():
+    """Homepage."""
 
-#     return render_template("index.html")
+    return render_template("index.html")
 
 ############################################################################
 
-@app.route('/')
-def display_default_map():
-    """Show default map."""
-    print "There should be a map here"
-    print "There should be a map here"
-    print "There should be a map here"
-    print "There should be a map here"
+# @app.route('/')
+# def display_default_map():
+#     """Show default map."""
+#     print "There should be a map here"
+#     print "There should be a map here"
+#     print "There should be a map here"
+#     print "There should be a map here"
 
-    return render_template("map_geodefault.html")
+#     return render_template("map_geodefault.html")
 ############################################################################
 
 

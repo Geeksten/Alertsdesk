@@ -3,6 +3,7 @@ decorator==4.0.4
 Flask==0.10.1
 Flask-DebugToolbar==0.10.0
 Flask-SQLAlchemy==2.0
+geopy==1.11.0
 ipython==4.0.0
 ipython-genutils==0.1.0
 itsdangerous==0.24

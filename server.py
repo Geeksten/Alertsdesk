@@ -31,23 +31,23 @@ openweather_api = os.environ['openweather_api']
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/')
-def index():
-    """Homepage."""
+# @app.route('/')
+# def index():
+#     """Homepage."""
 
-    return render_template("index.html")
+#     return render_template("index.html")
 
 ############################################################################
 
-# @app.route('/')
-# def display_default_map():
-#     """Show default map."""
-#     print "There should be a map here"
-#     print "There should be a map here"
-#     print "There should be a map here"
-#     print "There should be a map here"
+@app.route('/')
+def display_default_map():
+    """Show default map."""
+    print "There should be a map here"
+    print "There should be a map here"
+    print "There should be a map here"
+    print "There should be a map here"
 
-#     return render_template("map_geodefault.html")
+    return render_template("map_geodefault.html")
 ############################################################################
 
 
@@ -170,6 +170,10 @@ def report_process():
     user_id = session["user_id"]
     latitude = request.form["latitude"]
     longitude = request.form["longitude"]
+    #convert address to lat long
+    geolocator = GoogleV3()
+    address, (latitude, longitude) = geolocator.geocode(address)
+    latitude, longitude = (latitude, longitude)
 
     new_userreport = Userreport(address=address, zipcode=zipcode, report=report, user_id=user_id, latitude=latitude, longitude=longitude)
 

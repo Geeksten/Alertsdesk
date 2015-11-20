@@ -85,7 +85,7 @@ def register_process():
     db.session.commit()
 
     flash("Thank you %s, you have been added as a user. Go ahead and log in" % email)
-    return redirect('/')
+    return redirect('/login')
 
 ########################################################################
 

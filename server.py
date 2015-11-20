@@ -168,14 +168,18 @@ def report_process():
     address = request.form["address"]
     report = request.form["report"]
     user_id = session["user_id"]
-    latitude = request.form["latitude"]
-    longitude = request.form["longitude"]
+    date_now = datetime.now()
+    # print str(i)
+    date_added = date_now.strftime('%Y/%m/%d %H:%M:%S')
+    # print time_now
+    # latitude = request.form["latitude"]
+    # longitude = request.form["longitude"]
     #convert address to lat long
     geolocator = GoogleV3()
     address, (latitude, longitude) = geolocator.geocode(address)
     latitude, longitude = (latitude, longitude)
 
-    new_userreport = Userreport(address=address, zipcode=zipcode, report=report, user_id=user_id, latitude=latitude, longitude=longitude)
+    new_userreport = Userreport(address=address, zipcode=zipcode, report=report, date_added=date_added, user_id=user_id, latitude=latitude, longitude=longitude)
 
     db.session.add(new_userreport)
     db.session.commit()

@@ -267,7 +267,7 @@ def show_illness_form():
 
 @app.route('/illnessmap', methods=['POST'])
 def process_illness_result():
-    """Display weather conditions for given zipcode."""
+    """Display list of illnesses for given zipcode."""
 
     # Get form variables
     userzip = request.form.get("userzip")

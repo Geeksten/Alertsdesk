@@ -33,9 +33,9 @@
     <ul>
     {% for report_object in user.userreports %}
       <li>
-        {{ user.firstname }}
+        {{report_object.date_added}} {{ user.firstname }}
         added the following illness report 
-        for zipcode {{report_object.address}} : {{report_object.report}}
+        for {{report_object.address}} : {{report_object.report}}
 
       </li>
     {% endfor %}

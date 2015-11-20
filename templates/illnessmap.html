@@ -35,8 +35,11 @@
     </div>
 
     <div class="well spaced" style="width:97%">
-      
-    <h3>Reports for {{zipcode}}</h3>
+    
+    <h3>Reports</h3>
+    {% if zipcode == None %}
+    <b><p style="color:blue">No reports found for this zipcode.
+    {% else %}
     <ul>
     {% for report_object in justzip_list %}
         <li>
@@ -44,6 +47,7 @@
         </li>
     </ul>
     {% endfor %}
+    {% endif %}
     </div>
 <div id="illness-map"></div>
 <script>

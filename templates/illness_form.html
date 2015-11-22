@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 {% block head %}
 
-    <title>Geolocation</title>
+    <title>Illness Search</title>
     <style>
-        html, body, #illness-map{
+        /*html, body, #illness-map{
             height: 500px;
             margin: 0;
-        }
+        }*/
 
         .gm-style-iw {
             color: #04162b;
         }
+
+        html, body, #illness-markersmap {
+            height: 500px;
+            margin: 0;
+        }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="/static/illnessmarkers_map.js"></script>
     
 
 
@@ -21,7 +27,7 @@
 
 {% block content %}
 
-    <h1>Illness map</h1>
+    <h1>Illness search</h1>
     
     <div class="form-group">    
         <form action="/illnessmap" method="POST">
@@ -33,7 +39,7 @@
             <input type="submit" value="Submit" class="btn btn-danger">
         </form>
     </div>
-<div id="illness-map"></div>
+<div id="illness-markersmap"></div>
 <script>
         // Note: This example requires that you consent to location sharing when
         // prompted by your browser. If you see a blank space instead of the map, this

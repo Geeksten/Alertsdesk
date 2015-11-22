@@ -11,8 +11,14 @@
         .gm-style-iw {
             color: #04162b;
         }
+        html, body, #illness-markersmap {
+            height: 500px;
+            margin: 0;
+        }
+
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="/static/illnessmarkers_map.js"></script>
     
 
 
@@ -27,7 +33,7 @@
         <form action="/illnessmap" method="POST">
             <label>
             Enter your zipcode
-            <input type="text" name="zipcode" class="form-control">
+            <input type="text" name="userzip" class="form-control">
             </label>
             
             <input type="submit" value="Submit" class="btn btn-danger">
@@ -35,85 +41,86 @@
     </div>
 
     <div class="well spaced" style="width:97%">
-    
-    <h3>Reports</h3>
-    {% if zipcode == None %}
-    <b><p style="color:blue">No reports found for this zipcode.
-    {% else %}
+    <h3>Reports for {{zipcode}}</h3>
+    {% if justzip_list %}
     <ul>
     {% for report_object in justzip_list %}
         <li>
         {{report_object.report}}
         </li>
     </ul>
-    {% endfor %}
+    {% endfor %} 
+    {% else %}
+    <p><b> No reports found for this zipcode see map for surrounding areas.
     {% endif %}
     </div>
-<div id="illness-map"></div>
+
+<div id="illness-markersmap"></div>
+
 <script>
         // Note: This example requires that you consent to location sharing when
         // prompted by your browser. If you see a blank space instead of the map, this
         // is probably because you have denied permission for location sharing.
 
-        var map;
+  //       var map;
 
-        function initialize() {
-            var mapOptions = {
-                zoom: 15
-            };
-            map = new google.maps.Map(
-                    document.getElementById('illness-map'),
-                    mapOptions);
+  //       function initialize() {
+  //           var mapOptions = {
+  //               zoom: 15
+  //           };
+  //           map = new google.maps.Map(
+  //                   document.getElementById('illness-map'),
+  //                   mapOptions);
 
-            // Try HTML5 geolocation
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = new google.maps.LatLng(
-                            position.coords.latitude,
-                            position.coords.longitude);
+  //           // Try HTML5 geolocation
+  //           if (navigator.geolocation) {
+  //               navigator.geolocation.getCurrentPosition(function (position) {
+  //                   var pos = new google.maps.LatLng(
+  //                           position.coords.latitude,
+  //                           position.coords.longitude);
 
-                    // var infowindow = new google.maps.InfoWindow({
-                    //     map: map,
-                    //     position: pos,
-                    //     content: 'You are here!'
-                    // });
+  //                   // var infowindow = new google.maps.InfoWindow({
+  //                   //     map: map,
+  //                   //     position: pos,
+  //                   //     content: 'You are here!'
+  //                   // });
 
-                    var marker = new google.maps.Marker({
-                      position: pos,
-                      map: map,
-                      title: 'jsonresults here!'
-  });
+  //                   var marker = new google.maps.Marker({
+  //                     position: pos,
+  //                     map: map,
+  //                     title: 'jsonresults here!'
+  // });
 
-                    map.setCenter(pos);
-                }, function () {
-                    handleNoGeolocation(true);
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-        }
+  //                   map.setCenter(pos);
+  //               }, function () {
+  //                   handleNoGeolocation(true);
+  //               });
+  //           } else {
+  //               // Browser doesn't support Geolocation
+  //               handleNoGeolocation(false);
+  //           }
+  //       }
 
-        function handleNoGeolocation(errorFlag) {
-            var content;
+  //       function handleNoGeolocation(errorFlag) {
+  //           var content;
 
-            if (errorFlag) {
-                content = "Error: The Geolocation service failed.";
-            } else {
-                content = "Error: Your browser doesn't support geolocation.";
-            }
+  //           if (errorFlag) {
+  //               content = "Error: The Geolocation service failed.";
+  //           } else {
+  //               content = "Error: Your browser doesn't support geolocation.";
+  //           }
 
-            var options = {
-                map: map,
-                position: new google.maps.LatLng(32, -122),
-                content: content
-            };
+  //           var options = {
+  //               map: map,
+  //               position: new google.maps.LatLng(32, -122),
+  //               content: content
+  //           };
 
-            var infowindow = new google.maps.InfoWindow(options);
-            map.setCenter(options.position);
-        }
+  //           var infowindow = new google.maps.InfoWindow(options);
+  //           map.setCenter(options.position);
+  //       }
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+  //       google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
 

@@ -262,6 +262,7 @@ def show_symptoms(sym_id):
 @app.route('/illnessform', methods=['GET'])
 def show_illness_form():
     '''Displays a form so user can search for illnesses by zip'''
+
     return render_template("illness_form.html")
 
 
@@ -273,12 +274,12 @@ def process_illness_result():
     userzip = request.form.get("userzip")
     # print ("userzip is %s") % userzip
     zipcode = userzip
-    print zipcode
+    print "user entered zipcode %s" % zipcode
 
     # all_reports = db.session.query(Userreport.zipcode, Userreport.report)
     all_reports = db.session.query(Userreport.report)
     justzip_list = all_reports.filter(Userreport.zipcode == zipcode).all()
-    print justzip_list
+    print "results for users zip %s" % justzip_list
     print type(justzip_list)
     # for r in justzip:
     #     print r.report
@@ -293,7 +294,9 @@ def process_illness_result():
     # chills
     # sneezing
     # cold, flu, cough
+    # illnessinfo = {"zipcode": zipcode, "justzip_list": justzip_list}
 
+    # return render_template("illnessmap.html", illnessinfo=illnessinfo)
     return render_template("illnessmap.html", zipcode=zipcode, justzip_list=justzip_list)
 
 # ##########################################################################

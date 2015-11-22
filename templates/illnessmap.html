@@ -10,6 +10,9 @@
             height: 500px;
             margin: 0;
         }
+        #weatherbox{
+          vertical-align: right
+        }
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
@@ -45,8 +48,8 @@
     </div>
 
   <div id="weatherbox" class="well spaced" style="width:97%">
-  <h3> Weather report for {{city}} at {{ time_now}}</h3>
-  Weather in {{city}}, {{ weather_summary}}, temperature is {{ temperature}}, with lows of {{ lows}},
+  <h3> Weather report for {{city}} </h3>
+  Weather in {{city}}, {{ weather_summary}}, temperature is {{ temperature}}&degF, with lows of {{ lows}},
            highs of {{highs}}, humidity is {{ humidity_level}}<br>
            {{message}}
   </div>

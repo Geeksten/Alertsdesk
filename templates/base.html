@@ -92,14 +92,14 @@
         id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li><a href="/weathermap">Weather Map</a></li>
+          <!-- <li><a href="/weathermap">Weather Map</a></li> -->
           <li><a href="/illnessform">Illness Map</a></li>
           </ul>
 
         <!--The items on the right side of the nav bar-->
         <ul class="nav navbar-nav navbar-right">
           {% if "user_id" in session %}
-            <li><a href="/alerts">Alerts</a></li>
+            <!-- <li><a href="/alerts">Alerts</a></li> -->
             <li><a href="/addnewreport">Add new report</a></li>
             <li><a href="/profile/{{ session['user_id'] }}">Profile</a></li>
             <li><a href="/logout">Logout</a></li>

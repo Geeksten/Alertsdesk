@@ -51,10 +51,7 @@
         evt.preventDefault();
         // console.log("Hi I reached get weather");
 
-        var zipcode = {
-            "userzip":$("#zipcode").val()
-        };
-
+        
         $.post("/weathermap",
             zipcode,
             displayWeather);

@@ -389,7 +389,7 @@ def process_illness_result():
 ############################################################################
 
 ############################################################################
-    return render_template("illnessmap.html", time_now=time_now,
+    return render_template("illnessmap.html",
                            newzip=newzip, newzip_illness_list=newzip_illness_list,
                            city=city, weather_summary=weather_summary, temperature=temperature,
                            lows=lows, highs=highs, humidity_level=humidity_level, message=message)
@@ -508,14 +508,14 @@ def illnessmarkers_info():
 #########################################################################
 
 
-@app.route('/weathermap', methods=['GET'])
-def show_weather_form():
-    '''Displays a form so user can get weather by zip'''
+# @app.route('/weathermap', methods=['GET'])
+# def show_weather_form():
+    # '''Displays a form so user can get weather by zip'''
 
-    return render_template("weathermap.html")
+    # return render_template("weathermap.html")
 
 
-@app.route('/weathermap', methods=['POST'])
+# @app.route('/weathermap', methods=['POST'])
 # def process_weather_result():
 #     """Display weather conditions for given zipcode."""
 
@@ -525,13 +525,11 @@ def show_weather_form():
 #     userzip = request.form.get("userzip")
 #     print userzip
 
-#     # openweather_api = '27300f2017feaf811a4170ce642bc5f1'
 #     # api_key = 'appid=' + openweather_api
 
 #     # print api_key
 
 #     # url2 = 'http://api.openweathermap.org/data/2.5/weather?
-#     # appid=27300f2017feaf811a4170ce642bc5f1&zip=33511,us'
 #     shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
 #     # print shortened_url
 #     # final_url = 'http://api.openweathermap.org/data/2.5/weather?{}'.format(api_key)

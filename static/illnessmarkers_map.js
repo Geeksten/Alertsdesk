@@ -1,3 +1,4 @@
+// This shows illness markers on a map centered  on the users search location
 var map;
 
 function initialize() {
@@ -5,7 +6,7 @@ function initialize() {
         zoom: 5
     };
     map = new google.maps.Map(
-            document.getElementById('illness-markersmap'),
+            document.getElementById('illnessmarkers-map'),
             mapOptions);
 
 

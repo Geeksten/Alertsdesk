@@ -31,6 +31,8 @@ openweather_api = os.environ['openweather_api']
 app.jinja_env.undefined = StrictUndefined
 
 
+################################################################
+
 # @app.route('/')
 # def index():
 #     """Homepage."""
@@ -164,7 +166,7 @@ def report_process():
     """Process new report."""
 
     # Get form variables
-    zipcode = request.form["zipcode"]
+    # zipcode = request.form["zipcode"]
     address = request.form["address"]
     report = request.form["report"]
     user_id = session["user_id"]
@@ -175,11 +177,43 @@ def report_process():
     # latitude = request.form["latitude"]
     # longitude = request.form["longitude"]
     #convert address to lat long
-    geolocator = GoogleV3()
-    address, (latitude, longitude) = geolocator.geocode(address)
-    latitude, longitude = (latitude, longitude)
+    # geolocator = GoogleV3()
+    # address, (latitude, longitude) = geolocator.geocode(address)
+    # print address
+    # latitude, longitude = (latitude, longitude)
 
-    new_userreport = Userreport(address=address, zipcode=zipcode, report=report, date_added=date_added, user_id=user_id, latitude=latitude, longitude=longitude)
+    ##geocode the address
+
+    payload = {'address': address}
+
+    r = requests.get("https://maps.googleapis.com/maps/api/geocode/json", params=payload)
+
+    jdict = r.json()
+
+    stuff_list = jdict["results"]
+    for i_dict in stuff_list:
+        return i_dict
+
+    add_components_list = i_dict["address_components"]
+
+    city_dict = add_components_list[3]
+    city = city_dict["long_name"]
+
+    state_dict = add_components[5]
+    state = state_dict["long_name"]
+    state_code = state_dict["short_name"]
+
+    zipcode_dict = add_components[7]
+    zipcode = zipcode_dict["long_name"]
+
+    latlng_dict = i_dict["geometry"]
+    location_dict = latlon["location"]
+    latitide = location["lat"]
+    longitude = location["lng"]
+
+    new_userreport = Userreport(address=address, zipcode=zipcode,
+                                report=report, date_added=date_added,
+                                user_id=user_id, latitude=latitude, longitude=longitude)
 
     db.session.add(new_userreport)
     db.session.commit()
@@ -271,33 +305,95 @@ def process_illness_result():
     """Display list of illnesses for given zipcode."""
 
     # Get form variables
-    userzip = request.form.get("userzip")
+    newzip = request.form.get("zipcode")
     # print ("userzip is %s") % userzip
-    zipcode = userzip
-    print "user entered zipcode %s" % zipcode
 
-    # all_reports = db.session.query(Userreport.zipcode, Userreport.report)
-    all_reports = db.session.query(Userreport.report)
-    justzip_list = all_reports.filter(Userreport.zipcode == zipcode).all()
-    print "results for users zip %s" % justzip_list
-    print type(justzip_list)
-    # for r in justzip:
+    print "user entered this zipcode %s" % newzip
+
+    all_reports = db.session.query(Userreport.report, Userreport.date_added)
+    newzip_illness_list = all_reports.filter(Userreport.zipcode == newzip).all()
+    print newzip_illness_list
+
+    # for r in newzip_illness_list:
     #     print r.report
     #    ...:
     # fever, sweats
-    # chills
-    # severe headache
-    # chills
-    # fever, sweats
-    # flu
-    # rash
-    # chills
-    # sneezing
-    # cold, flu, cough
-    # illnessinfo = {"zipcode": zipcode, "justzip_list": justzip_list}
+    # chills...
+#########################################################################
 
-    # return render_template("illnessmap.html", illnessinfo=illnessinfo)
-    return render_template("illnessmap.html", zipcode=zipcode, justzip_list=justzip_list)
+# def process_weather_result():
+#     """Display weather conditions for given zipcode."""
+
+    # openweather_api = os.environ['openweather_api']
+    api_key = 'appid=' + openweather_api
+    # Get form variables
+    print newzip
+    shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
+    payloadwet = "&" + 'zip=' + newzip + ',us' + "&units=imperial"
+    print payloadwet
+
+    r = requests.get(shortened_url, params=api_key + payloadwet)
+    # print r   # gives resposnse 200 everythings ok
+
+    jdict = r.json()
+    # print jdict
+
+    i = datetime.now()
+    # print str(i)
+    time_now = i.strftime('%Y/%m/%d %H:%M:%S')
+    # print time_now
+
+    city = jdict['name']
+    # print city
+
+    coordinates = jdict['coord']
+    print coordinates
+
+    weather_conditions = jdict['weather']
+    # print weather_conditions
+    # type(weather_conditions)  # list
+
+    for w in weather_conditions:
+        # print w
+        # type(w)  # dict
+        # cloud_cover = w['description']
+        weather_summary = w['main']
+        # print cloud_cover
+
+    atmospheric_conditions = jdict['main']
+    # print atmospheric_conditions
+    # type(atmospheric_conditions)  # dict
+
+    humidity_level = atmospheric_conditions['humidity']
+    # print humidity_level
+
+    temperature = atmospheric_conditions['temp']
+
+    lows = atmospheric_conditions['temp_min']
+    # print lows
+
+    highs = atmospheric_conditions['temp_max']
+    # print highs
+    if weather_summary == "Rain":
+        message = "Do not forget your raincoat or umbrella"
+
+    if temperature > "85":
+        message = "Remember to rehydrate"
+
+    # print ("Current time is %s" % time_now)
+
+    # weather_report = '''Weather in %s, %s, temperature is %s, with lows of %s,
+    #           highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
+    #print weather_report
+
+############################################################################
+
+############################################################################
+    return render_template("illnessmap.html", time_now=time_now,
+                           newzip=newzip, newzip_illness_list=newzip_illness_list,
+                           city=city, weather_summary=weather_summary, temperature=temperature,
+                           lows=lows, highs=highs, humidity_level=humidity_level, message=message)
+    # return render_template("illnessmap.html", newzip=newzip, newzip_illness_list=newzip_illness_list)
 
 # ##########################################################################
 
@@ -387,11 +483,11 @@ def illness_trends_data():
 ########################################################################
 
 
-@app.route('/illnessmarkers')
-def illnessmarkers():
-    """Show map of illnesses with markers. Use this route to show users who is sick in their area using pins"""
+# @app.route('/illnessmarkers')
+# def illnessmarkers():
+#     """Show map of illnesses with markers. Use this route to show users who is sick in their area using pins"""
 
-    return render_template("illnessmarkers_map.html")
+#     return render_template("illnessmarkers_map.html")
 
 
 @app.route('/illnessmarkers.json')
@@ -420,103 +516,103 @@ def show_weather_form():
 
 
 @app.route('/weathermap', methods=['POST'])
-def process_weather_result():
-    """Display weather conditions for given zipcode."""
+# def process_weather_result():
+#     """Display weather conditions for given zipcode."""
 
-    # openweather_api = os.environ['openweather_api']
-    api_key = 'appid=' + openweather_api
-    # Get form variables
-    userzip = request.form.get("userzip")
-    print userzip
+#     # openweather_api = os.environ['openweather_api']
+#     api_key = 'appid=' + openweather_api
+#     # Get form variables
+#     userzip = request.form.get("userzip")
+#     print userzip
 
-    # openweather_api = '27300f2017feaf811a4170ce642bc5f1'
-    # api_key = 'appid=' + openweather_api
+#     # openweather_api = '27300f2017feaf811a4170ce642bc5f1'
+#     # api_key = 'appid=' + openweather_api
 
-    # print api_key
+#     # print api_key
 
-    # url2 = 'http://api.openweathermap.org/data/2.5/weather?
-    # appid=27300f2017feaf811a4170ce642bc5f1&zip=33511,us'
-    shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
-    # print shortened_url
-    # final_url = 'http://api.openweathermap.org/data/2.5/weather?{}'.format(api_key)
+#     # url2 = 'http://api.openweathermap.org/data/2.5/weather?
+#     # appid=27300f2017feaf811a4170ce642bc5f1&zip=33511,us'
+#     shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
+#     # print shortened_url
+#     # final_url = 'http://api.openweathermap.org/data/2.5/weather?{}'.format(api_key)
 
-    # print final_url
-    # print "please type in your zipcode"
-    # zipcode = '33511'  # hardcode zip for now
-    # zipcode = request.form.get('user_zip')
-    payload = "&" + 'zip=' + userzip + ',us' + "&units=imperial"
-    # print payload
+#     # print final_url
+#     # print "please type in your zipcode"
+#     # zipcode = '33511'  # hardcode zip for now
+#     # zipcode = request.form.get('user_zip')
+#     payload = "&" + 'zip=' + userzip + ',us' + "&units=imperial"
+#     # print payload
 
-    r = requests.get(shortened_url, params=api_key + payload)
-    # print r   # gives resposnse 200 everythings ok
+#     r = requests.get(shortened_url, params=api_key + payload)
+#     # print r   # gives resposnse 200 everythings ok
 
-    jdict = r.json()
-    # print jdict
+#     jdict = r.json()
+#     # print jdict
 
-    # for thing in jdict:
-    #     print thing
+#     # for thing in jdict:
+#     #     print thing
 
-       #  for r in jdict:
-       # ....:     print r
-       # ....:
-       #  clouds
-       #  name
-       #  coord
-       #  sys
-       #  weather
-       #  cod
-       #  base
-       #  dt
-       #  main
-       #  id
-       #  wind
+#        #  for r in jdict:
+#        # ....:     print r
+#        # ....:
+#        #  clouds
+#        #  name
+#        #  coord
+#        #  sys
+#        #  weather
+#        #  cod
+#        #  base
+#        #  dt
+#        #  main
+#        #  id
+#        #  wind
 
-    i = datetime.now()
-    # print str(i)
-    time_now = i.strftime('%Y/%m/%d %H:%M:%S')
-    # print time_now
+#     i = datetime.now()
+#     # print str(i)
+#     time_now = i.strftime('%Y/%m/%d %H:%M:%S')
+#     # print time_now
 
-    city = jdict['name']
-    # print city
+#     city = jdict['name']
+#     # print city
 
-    coordinates = jdict['coord']
-    print coordinates
+#     coordinates = jdict['coord']
+#     print coordinates
 
-    weather_conditions = jdict['weather']
-    # print weather_conditions
-    # type(weather_conditions)  # list
+#     weather_conditions = jdict['weather']
+#     # print weather_conditions
+#     # type(weather_conditions)  # list
 
-    for w in weather_conditions:
-        # print w
-        # type(w)  # dict
-        cloud_cover = w['description']
-        # print cloud_cover
+#     for w in weather_conditions:
+#         # print w
+#         # type(w)  # dict
+#         cloud_cover = w['description']
+#         # print cloud_cover
 
-    atmospheric_conditions = jdict['main']
-    # print atmospheric_conditions
-    # type(atmospheric_conditions)  # dict
+#     atmospheric_conditions = jdict['main']
+#     # print atmospheric_conditions
+#     # type(atmospheric_conditions)  # dict
 
-    humidity_level = atmospheric_conditions['humidity']
-    # print humidity_level
+#     humidity_level = atmospheric_conditions['humidity']
+#     # print humidity_level
 
-    temperature = atmospheric_conditions['temp']
+#     temperature = atmospheric_conditions['temp']
 
-    lows = atmospheric_conditions['temp_min']
-    # print lows
+#     lows = atmospheric_conditions['temp_min']
+#     # print lows
 
-    highs = atmospheric_conditions['temp_max']
-    # print highs
+#     highs = atmospheric_conditions['temp_max']
+#     # print highs
 
-    print ("Current time is %s" % time_now)
+#     print ("Current time is %s" % time_now)
 
-    print '''Weather in %s, %s, temperature is %s, with lows of %s,
-              highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
-    weather_report = '''Weather in %s, %s, temperature is %s, with lows of %s,
-              highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
+#     print '''Weather in %s, %s, temperature is %s, with lows of %s,
+#               highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
+#     weather_report = '''Weather in %s, %s, temperature is %s, with lows of %s,
+#               highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
 
-    return weather_report
-    # return render_template("weathermap.html", weather_report=weather_report)
-    print weather_report
+#     return weather_report
+#     # return render_template("weathermap.html", weather_report=weather_report)
+#     print weather_report
 
 
 ##########################################################################

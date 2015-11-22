@@ -49,8 +49,7 @@
                       margin: 0px;
                       padding: 0px;
                       background-color: olive;
-                      width: 100%;
-                      height: 100%;
+                      height:50%;
                    }
 
         .spaced {
@@ -116,6 +115,16 @@
     <!-- /.container-fluid -->
 </nav>
 
+<!-- <div id="extending">
+  {% for message in get_flashed_messages() %}
+
+    <div class="alert alert-danger" style="width:90%; margin:0 auto;">{{ message }}
+    </div>
+
+  {% endfor %}
+</div> -->
+
+{% block content %} 
 <div id="extending">
   {% for message in get_flashed_messages() %}
 
@@ -124,8 +133,6 @@
 
   {% endfor %}
 </div>
-
-{% block content %} 
 
 {% endblock %}
 

@@ -27,7 +27,7 @@
     <h1>Illness reports</h1>
     <h4><a href="/illnessform">Click here to search again</a> <br>
           or scroll down to view reports for surrounding areas on map below</h4>
-    <h4><a href="/illness-trends">View trends on chart</a> <br></h4>
+    <h4><a href="/illness-trends">View trends on chart</a></h4><br>
 
     <div class="well spaced" style="width:97%">
     {% if newzip %}
@@ -42,16 +42,24 @@
         </ul>
         {% endfor %}
       {% else %}
-        <h4>No reports found for this zipcode <br>
+        <h4>No illness reports found for this zipcode<br>
+        <li><a href="/addnewreport">Click here to add new report</a></li>
       {% endif %}
     {%endif%}
     </div>
 
   <div id="weatherbox" class="well spaced" style="width:97%">
-  <h3> Weather report for {{city}} </h3>
-  Weather in {{city}}, {{ weather_summary}}, temperature is {{ temperature}}&degF, with lows of {{ lows}},
-           highs of {{highs}}, humidity is {{ humidity_level}}<br>
-           {{message}}
+  {% if newzip %}
+
+      <h3> Weather report for {{city}} </h3>
+      Weather in {{city}}, {{ weather_summary}}, temperature is {{ temperature}}&degF, 
+      with lows of {{ lows}}&degF,
+      highs of {{highs}}&degF, 
+      humidity is {{ humidity_level}}<br>
+      {{message}}
+
+
+  {%endif%}
   </div>
 
 <div id="illnessmarkers-map"></div>

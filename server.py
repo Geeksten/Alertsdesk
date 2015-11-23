@@ -375,10 +375,12 @@ def process_illness_result():
     highs = atmospheric_conditions['temp_max']
     # print highs
     if weather_summary == "Rain":
-        message = "Do not forget your raincoat or umbrella"
+            message = "Do not forget your raincoat or umbrella"
 
     if temperature > "85":
-        message = "Remember to rehydrate"
+            message = "Remember to rehydrate"
+    else:
+        message = "Stay warm"
 
     # print ("Current time is %s" % time_now)
 

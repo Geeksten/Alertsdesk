@@ -18,6 +18,9 @@ import pprint
 from datetime import datetime
 #import os so we can use the secrets file
 import os
+#Twilio
+# from twilio.rest import TwilioRestClient
+# import twilio.twiml
 
 # make it a Flask app
 app = Flask(__name__)

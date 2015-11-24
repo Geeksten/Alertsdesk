@@ -40,19 +40,27 @@ app.jinja_env.undefined = StrictUndefined
 # def index():
 #     """Homepage."""
 
-#     return render_template("index.html")
+#     return render_template("splash.html")
+
+######################################################################
+@app.route('/')
+def index():
+    """Homepage."""
+
+    return render_template("index.html")
+
 
 ############################################################################
 
-@app.route('/')
-def display_default_map():
-    """Show default map."""
-    print "There should be a map here"
-    print "There should be a map here"
-    print "There should be a map here"
-    print "There should be a map here"
+# @app.route('/')
+# def display_default_map():
+#     """Show default map."""
+#     print "There should be a map here"
+#     print "There should be a map here"
+#     print "There should be a map here"
+#     print "There should be a map here"
 
-    return render_template("map_geodefault.html")
+#     return render_template("map_geodefault.html")
 ############################################################################
 
 
@@ -192,27 +200,35 @@ def report_process():
     r = requests.get("https://maps.googleapis.com/maps/api/geocode/json", params=payload)
 
     jdict = r.json()
+    print """I got to jdict########################### """
+    print jdict
+    print """I got to jdict########################### """
 
     stuff_list = jdict["results"]
     for i_dict in stuff_list:
-        return i_dict
+        # return i_dict
+        print i_dict
+        print """I got to idict########################### """
 
-    add_components_list = i_dict["address_components"]
+        print "about to print address_components_list########################"
+        add_components_list = i_dict["address_components"]
+        print add_components_list
+        print len(add_components_list)
 
     city_dict = add_components_list[3]
     city = city_dict["long_name"]
 
-    state_dict = add_components[5]
+    state_dict = add_components_list[5]
     state = state_dict["long_name"]
     state_code = state_dict["short_name"]
 
-    zipcode_dict = add_components[7]
+    zipcode_dict = add_components_list[7]
     zipcode = zipcode_dict["long_name"]
 
     latlng_dict = i_dict["geometry"]
-    location_dict = latlon["location"]
-    latitide = location["lat"]
-    longitude = location["lng"]
+    location_dict = latlng_dict["location"]
+    latitude = location_dict["lat"]
+    longitude = location_dict["lng"]
 
     new_userreport = Userreport(address=address, zipcode=zipcode,
                                 report=report, date_added=date_added,

@@ -10,9 +10,9 @@
             height: 500px;
             margin: 0;
         }
-        #weatherbox{
+        /*#weatherbox{
           vertical-align: right
-        }
+        }*/
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
@@ -45,9 +45,8 @@
         <h4>No illness reports found for this zipcode<br>
         <li><a href="/addnewreport">Click here to add new report</a></li>
       {% endif %}
-    {%endif%}
+    {%endif%}>
     </div>
-
   <div id="weatherbox" class="well spaced" style="width:97%">
   {% if newzip %}
 

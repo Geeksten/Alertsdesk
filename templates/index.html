@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Weather</h1>
-    <img src="../static/img/us_map.png" alt="United States map" height="400" width="900">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+                <h1>Stay informed about illnesses in your area</h1>
+            </div>
+
+            <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+
+                <div class="col-md-4 col-md-offset-3">
+                    <h2 id="signup">Sign Up Today</h2>
+
+                    <form action="/register" method="POST">
+
+                        <div class="form-group">
+                            <input name="email" type="email" class="form-control" placeholder="Your Email Address">
+                            <input name="password" type="password" class="form-control" placeholder="Your Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn btn-danger">
+                        </div>
+                </div>
+
+            </div> -->
+        </div>
+    </div>
 
 
 {% endblock %}

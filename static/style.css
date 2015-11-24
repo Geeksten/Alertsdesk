@@ -1,3 +1,121 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-image: url(img/aurora.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #000;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+.navbar {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav li a {
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav li a:hover {
+  color: #ED8429;
+}
+
+p {
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 100;
+  font-size: 48px;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+
+.left {
+  margin-top: 100px;
+}
+
+form {
+  margin-top: 25px;
+}
+
+#signup {
+    color: #ffd200;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-top: 125px;
+}
+
+
+.btn {
+  margin: 25px;
+  display: inline-block;
+  padding: 15px 30px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.4s;
+     -moz-transition: all 0.4s;
+       -o-transition: all 0.4s;
+          transition: all 0.4s;
+}
+.btn:hover {
+  color: #fff;
+  border-color: #BFFF97;
+}
+
+
+input[type="text"], input[type="password"] {
+  width: 350px;
+  padding: 10px 0px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid #cccccc;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 50px;
+}
+
+input[type="submit"] {
+  background: #ccc;
+  border: 0;
+  width: 350px;
+  height: 40px;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+input[type="submit"]:hover {
+  background: #cccccc;
+  animation-name: shake;
+}
+
+
 .illness-chart {
     width: 70%;
     margin-left: auto;

@@ -21,13 +21,15 @@
         <ul class="nav navbar-nav">
                 
                 <li><a href="/register">Register</a></li> -->
-  <h2>{{ user.firstname }} ({{ user.lastname }})</h2>
+  <h2>{{ user.firstname }} {{ user.lastname }}</h2>
 
   <b><p style="color:green">Email: {{ user.email }}</p></b>
 
   
     <h3>Reports</h3>
     <b><p style="color:blue"><a href="/addnewreport">Click here to add a new report:</a></p></b>
+    <b><p style="color:blue"><a href="/illnessform">Click here to search reports:</a></p></b>
+    <b><p style="color:blue"><a href="/illness-trends">View trends on chart</a></p></b>
 
     {% if user.userreports %}
     <ul>

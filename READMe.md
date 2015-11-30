@@ -1,18 +1,18 @@
-Alerts Project 
+##Alertsdesk webapp
+===================
 Learn more about the developer: www.linkedin.com/in/christinebabu/
+
 ##Synopsis
-Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts. 
-Integration of Google Maps API allows users to dynamically display the location of each alert. 
-Users can also get a list of alerts by zipcode. 
-A dynamic chart summarizes the illness trends using the number of reports querying by reported symptoms.
-Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode.
+*Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts. 
+*Integration of Google Maps API allows users to dynamically display the location of each alert. 
+*Users can also get a list of alerts by zipcode. 
+*A dynamic chart summarizes the illness trends using the number of reports querying by reported symptoms.
+*Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode.
 
-##Motivation
 
-##Alertsdesk
-============
+##MVP Core Functionality
+========================
 
-MVP Core Functionality
 *Register new users
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
@@ -33,7 +33,7 @@ MVP Core Functionality
 
 
 ##Add-on Features (in no order):
-============
+================================
 *Option to sign up for email and/or text alerts
 *Option to text a specific number and get top three reports (by count) for specific zipcode
 *Integrate with twitter for log in (Oauth) and post to twitter
@@ -41,10 +41,10 @@ MVP Core Functionality
 *Twilio integration for option to add reports by text
 
 ##API Reference
+================
 *Google Maps
 *OpenWeather
 
-##Tests
-
 ##Contributors
+===============
 Christine Babu www.linkedin.com/in/christinebabu/

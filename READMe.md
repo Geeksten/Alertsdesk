@@ -33,8 +33,11 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
+##Technologies
 
-##Add-on Features (in no order):
+Python, Flask, SQLite3, SQLAlchemy, HTML/CSS, Jinja, Twitter Bootstrap, Javascript, jQuery, AJAX OpenWeather API, Google Maps API
+
+##Version 2.0: Add-on Features (in no order):
 
 *Option to sign up for email and/or text alerts
 

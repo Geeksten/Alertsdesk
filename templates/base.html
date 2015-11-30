@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Alerts</title>
+  <title>Alertsdesk</title>
   <!--Bootstrap -->
   <link rel="stylesheet"
         href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Tahoma" 
+  <link href="http://fonts.googleapis.com/css?family=Raleway:300" 
         rel="stylesheet" type="text/css">
+  <link rel="stylesheet"
+            href="/static/style.css">
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
@@ -19,7 +21,6 @@
       <!-- put extra CSS/JS here -->
   {% endblock %}
   <style>
-        h1, h2, h3, .navbar-brand { font-family: "Tahoma"; }
         
         #homepage-title {
             margin: 0;
@@ -30,31 +31,9 @@
             font-weight: 400;
             font-size: 500%;
         }
-        html, body {
-          width: 100%;
-          height: 300px;
-          margin: 0;
-          background-color: olive;
+        
         }
-        .form-control{
-          color: black;
-        }
-        #extending {
-                      margin: 0px;
-                      padding: 0px;
-                      background-color: olive;
-                      height:50%;
-                   }
-        .spaced {
-          margin-left:20px; 
-          margin-top: 20px;
-        }
-        .weatherresult {
-          color:white;
-        }
-        label{
-          color:white;
-        }
+
   </style>
 
    </head>
@@ -74,7 +53,7 @@
             </button>
             <a class="navbar-brand" href="/">
                 <span class=""></span>
-                Welcome to Illness radar
+                Welcome to Alertsdesk
             </a>
         </div>
 
@@ -83,14 +62,18 @@
         id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
+          {% if "user_id" in session %}
           <!-- <li><a href="/weathermap">Weather Map</a></li> -->
           <li><a href="/illnessform">Illness Map</a></li>
+          <li><a href="/illness-trends">View trends on chart</a></li>
           </ul>
+          {% endif %}
 
         <!--The items on the right side of the nav bar-->
         <ul class="nav navbar-nav navbar-right">
           {% if "user_id" in session %}
             <!-- <li><a href="/alerts">Alerts</a></li> -->
+            
             <li><a href="/addnewreport">Add new report</a></li>
             <li><a href="/profile/{{ session['user_id'] }}">Profile</a></li>
             <li><a href="/logout">Logout</a></li>

@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+from sqlalchemy import desc
 # import geopy tools for lat/long derivation from address data
 from geopy.geocoders import GoogleV3
 # import database & classes from model.py
@@ -177,13 +178,13 @@ def report_process():
     """Process new report."""
 
     # Get form variables
-    # zipcode = request.form["zipcode"]
+    zipcode = request.form["zipcode"]
     address = request.form["address"]
     report = request.form["report"]
     user_id = session["user_id"]
     date_now = datetime.now()
     # print str(i)
-    date_added = date_now.strftime('%Y/%m/%d %H:%M:%S')
+    date_added = date_now.strftime('%A %B %d %Y %I:%M%p %Z')
     # print time_now
     # latitude = request.form["latitude"]
     # longitude = request.form["longitude"]
@@ -222,8 +223,9 @@ def report_process():
     state = state_dict["long_name"]
     state_code = state_dict["short_name"]
 
-    zipcode_dict = add_components_list[7]
-    zipcode = zipcode_dict["long_name"]
+    # zipcode_dict = add_components_list[7]
+    # zipcode = zipcode_dict["short_name"]
+    # print "This is the zipcode %s" % zipcode
 
     latlng_dict = i_dict["geometry"]
     location_dict = latlng_dict["location"]
@@ -253,18 +255,18 @@ def report_process():
 #########################################################################
 
 
-@app.route('/alerts', methods=['GET'])
-def alerts_signup_form():
-    """Show alerts sign up form."""
+# @app.route('/alerts', methods=['GET'])
+# def alerts_signup_form():
+#     """Show alerts sign up form."""
 
-    user_id = session.get("user_id")
+#     user_id = session.get("user_id")
 
-    if not user_id:
-        flash("Sorry log in required before signing up for alerts.")
-        return redirect('/login')
+#     if not user_id:
+#         flash("Sorry log in required before signing up for alerts.")
+#         return redirect('/login')
 
-    else:
-        return render_template("alerts_signup.html")
+#     else:
+#         return render_template("alerts_signup.html")
 
 #########################################################################
 
@@ -330,7 +332,7 @@ def process_illness_result():
     print "user entered this zipcode %s" % newzip
 
     all_reports = db.session.query(Userreport.report, Userreport.date_added)
-    newzip_illness_list = all_reports.filter(Userreport.zipcode == newzip).all()
+    newzip_illness_list = all_reports.filter(Userreport.zipcode == newzip).order_by(desc(Userreport.date_added)).all()
     print newzip_illness_list
 
     # for r in newzip_illness_list:
@@ -359,7 +361,7 @@ def process_illness_result():
 
     i = datetime.now()
     # print str(i)
-    time_now = i.strftime('%Y/%m/%d %H:%M:%S')
+    time_now = i.strftime('%A %B %d %Y %I:%M%p %Z')
     # print time_now
 
     city = jdict['name']
@@ -422,8 +424,14 @@ def process_illness_result():
 @app.route('/illness-trends')
 def illness_trends():
     """Show illness charts"""
+    user_id = session.get("user_id")
 
-    return render_template("illness_chart.html")
+    if not user_id:
+        flash("Sorry log in required to access features.")
+        return redirect('/login')
+    else:
+
+        return render_template("illness_chart.html")
 
 
 @app.route('/illness-trends.json')
@@ -442,61 +450,68 @@ def illness_trends_data():
     cough = all_reports.filter(Userreport.report.like('%cough%')).count()
     flu = all_reports.filter(Userreport.report.like('%flu%')).count()
     fever = all_reports.filter(Userreport.report.like('%fever%')).count()
-    sweats = all_reports.filter(Userreport.report.like('%sweats%')).count()
-    chills = all_reports.filter(Userreport.report.like('%chills%')).count()
-    sneezing = all_reports.filter(Userreport.report.like('%sneezing%')).count()
-    headache = all_reports.filter(Userreport.report.like('%headache%')).count()
+    # sweats = all_reports.filter(Userreport.report.like('%sweats%')).count()
+    # chills = all_reports.filter(Userreport.report.like('%chills%')).count()
+    # sneezing = all_reports.filter(Userreport.report.like('%sneezing%')).count()
+    # headache = all_reports.filter(Userreport.report.like('%headache%')).count()
+    strep = all_reports.filter(Userreport.report.like('%strep%')).count()
     #cold, cough, flu, fever, sweats, chills,  sneezing, severeheadache
     data_list_of_dicts = {
         'userreports': [
             {
                 "value": cold,
-                "color": "#F7464A",
-                "highlight": "#FF5A5E",
+                "color": "pink",
+                "highlight": "pink",
                 "label": "cold"
             },
             {
                 "value": cough,
-                "color": "#46BFBD",
-                "highlight": "#5AD3D1",
+                "color": "orange",
+                "highlight": "orange",
                 "label": "cough"
             },
             {
                 "value": flu,
-                "color": "#FDB45C",
-                "highlight": "#FFC870",
+                "color": "red",
+                "highlight": "red",
                 "label": "flu"
             },
             {
                 "value": fever,
-                "color": "#F7464A",
-                "highlight": "#FF5A5E",
+                "color": "green",
+                "highlight": "#green",
                 "label": "fever"
             },
+            # {
+            #     "value": sweats,
+            #     "color": "blue",
+            #     "highlight": "blue",
+            #     "label": "sweats"
+            # },
+            # {
+            #     "value": chills,
+            #     "color": "white",
+            #     "highlight": "white",
+            #     "label": "chills"
+            # },
             {
-                "value": sweats,
-                "color": "#46BFBD",
-                "highlight": "#5AD3D1",
-                "label": "sweats"
-            },
-            {
-                "value": chills,
-                "color": "#FDB45C",
-                "highlight": "#FFC870",
-                "label": "chills"
-            },
-            {
-                "value": sneezing,
-                "color": "#46BFBD",
-                "highlight": "#5AD3D1",
-                "label": "sneezing"
-            },
-            {
-                "value": headache,
-                "color": "#FDB45C",
-                "highlight": "#FFC870",
-                "label": "severe headaches"
+                "value": strep,
+                "color": "gray",
+                "highlight": "gray",
+                "label": "strep"
             }
+            # {
+            #     "value": sneezing,
+            #     "color": "#46BFBD",
+            #     "highlight": "#5AD3D1",
+            #     "label": "sneezing"
+            # },
+            # {
+            #     "value": headache,
+            #     "color": "#FDB45C",
+            #     "highlight": "#FFC870",
+            #     "label": "severe headaches"
+            # }
         ]
     }
     return jsonify(data_list_of_dicts)
@@ -519,7 +534,9 @@ def illnessmarkers_info():
         userreport.urep_id: {
             "latitude": userreport.latitude,
             "longitude": userreport.longitude,
+            "zipcode": userreport.zipcode,
             "report": userreport.report
+
         }
 
         for userreport in Userreport.query.limit(50)}
@@ -528,113 +545,6 @@ def illnessmarkers_info():
 
 #########################################################################
 
-
-# @app.route('/weathermap', methods=['GET'])
-# def show_weather_form():
-    # '''Displays a form so user can get weather by zip'''
-
-    # return render_template("weathermap.html")
-
-
-# @app.route('/weathermap', methods=['POST'])
-# def process_weather_result():
-#     """Display weather conditions for given zipcode."""
-
-#     # openweather_api = os.environ['openweather_api']
-#     api_key = 'appid=' + openweather_api
-#     # Get form variables
-#     userzip = request.form.get("userzip")
-#     print userzip
-
-#     # api_key = 'appid=' + openweather_api
-
-#     # print api_key
-
-#     # url2 = 'http://api.openweathermap.org/data/2.5/weather?
-#     shortened_url = 'http://api.openweathermap.org/data/2.5/weather'
-#     # print shortened_url
-#     # final_url = 'http://api.openweathermap.org/data/2.5/weather?{}'.format(api_key)
-
-#     # print final_url
-#     # print "please type in your zipcode"
-#     # zipcode = '33511'  # hardcode zip for now
-#     # zipcode = request.form.get('user_zip')
-#     payload = "&" + 'zip=' + userzip + ',us' + "&units=imperial"
-#     # print payload
-
-#     r = requests.get(shortened_url, params=api_key + payload)
-#     # print r   # gives resposnse 200 everythings ok
-
-#     jdict = r.json()
-#     # print jdict
-
-#     # for thing in jdict:
-#     #     print thing
-
-#        #  for r in jdict:
-#        # ....:     print r
-#        # ....:
-#        #  clouds
-#        #  name
-#        #  coord
-#        #  sys
-#        #  weather
-#        #  cod
-#        #  base
-#        #  dt
-#        #  main
-#        #  id
-#        #  wind
-
-#     i = datetime.now()
-#     # print str(i)
-#     time_now = i.strftime('%Y/%m/%d %H:%M:%S')
-#     # print time_now
-
-#     city = jdict['name']
-#     # print city
-
-#     coordinates = jdict['coord']
-#     print coordinates
-
-#     weather_conditions = jdict['weather']
-#     # print weather_conditions
-#     # type(weather_conditions)  # list
-
-#     for w in weather_conditions:
-#         # print w
-#         # type(w)  # dict
-#         cloud_cover = w['description']
-#         # print cloud_cover
-
-#     atmospheric_conditions = jdict['main']
-#     # print atmospheric_conditions
-#     # type(atmospheric_conditions)  # dict
-
-#     humidity_level = atmospheric_conditions['humidity']
-#     # print humidity_level
-
-#     temperature = atmospheric_conditions['temp']
-
-#     lows = atmospheric_conditions['temp_min']
-#     # print lows
-
-#     highs = atmospheric_conditions['temp_max']
-#     # print highs
-
-#     print ("Current time is %s" % time_now)
-
-#     print '''Weather in %s, %s, temperature is %s, with lows of %s,
-#               highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
-#     weather_report = '''Weather in %s, %s, temperature is %s, with lows of %s,
-#               highs of %s, humidity is %d''' % (city, cloud_cover, temperature, lows, highs, humidity_level)
-
-#     return weather_report
-#     # return render_template("weathermap.html", weather_report=weather_report)
-#     print weather_report
-
-
-##########################################################################
 
 @app.route('/logout')
 def logout():

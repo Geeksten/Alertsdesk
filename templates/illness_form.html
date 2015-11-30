@@ -2,16 +2,6 @@
 {% block head %}
 
     <title>Illness Search</title>
-    <style>
-        .gm-style-iw {
-            color: #04162b;
-        }
-
-        html, body, #geolocill-map {
-            height: 500px;
-            margin: 0;
-        }
-    </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script src="/static/geoloc_illmap.js"></script>
     
@@ -25,19 +15,22 @@
     <h1>Illness search</h1>
     
     <div class="form-group">
-        <section class="col-xs-12 col-md-6 col-lg-6">
+        <section class="col-xs-12 col-md-6 col-lg-4">
         <!-- <section class="col-xs-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3"> -->
         <form action="/illnessmap" method="POST">
-            <label>
+            <label style="color:white">
             Enter your zipcode
-            <input type="text" name="zipcode" class="form-control">
+            <input type="text" name="zipcode" class="form-control" placeholder="94102">
             </label>
             
             <input type="submit" value="Submit" class="btn btn-danger">
         </form>
         </section>
     </div>
-<div id="geolocill-map">
+    
+<div id="geolocill-map" class="map">
+    <section class="col-xs-12 col-md-6 col-lg-8">
+    </section>
 </div>
     
 {% endblock %}

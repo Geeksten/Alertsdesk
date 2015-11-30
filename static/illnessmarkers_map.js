@@ -3,7 +3,7 @@ var map;
 
 function initialize() {
     var mapOptions = {
-        zoom: 5
+        zoom: 10
     };
     map = new google.maps.Map(
             document.getElementById('illnessmarkers-map'),

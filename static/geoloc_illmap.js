@@ -3,7 +3,7 @@ var map;
 
 function initialize() {
     var mapOptions = {
-        zoom: 5
+        zoom: 10
     };
     map = new google.maps.Map(
             document.getElementById('geolocill-map'),
@@ -77,7 +77,7 @@ function initialize() {
       // "1": {
       //      "latitide": "37.7749295",
       //      "longitude": "-122.4194155",
-      //      "report": "reprt"
+      //      "report": "report"
       //   },...
       // }
     console.log(userreports);
@@ -99,7 +99,9 @@ function initialize() {
           // Define the content of the infoWindow
         html = (
               '<div class="window-content">' +
-                  '<p><b>Alert: </b>' + userreport.report + '</p>' +
+                  // '<p><b>Alert: </b>' + 
+                  userreport.report + 
+                  // '</p>' +
     
               '</div>');
 

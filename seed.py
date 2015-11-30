@@ -51,12 +51,13 @@ def load_userreports():
         # print type(row)
 
         list_of_values = row.split("|")
-        urep_id, user_id, address, zipcode, latitude, longitude, report = list_of_values
+        urep_id, user_id, address, zipcode, date_added, latitude, longitude, report = list_of_values
 
         userreport = Userreport(urep_id=urep_id,
                                 user_id=user_id,
                                 address=address,
                                 zipcode=zipcode,
+                                date_added=date_added,
                                 latitude=latitude,
                                 longitude=longitude,
                                 report=report)

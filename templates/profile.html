@@ -1,51 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <!-- <div class="collapse navbar-collapse"
-             id="bs-example-navbar-collapse-1">
-        
-  </div>
-  <br> -->
-
-  <div class="well spaced" style="width:97%">
-                <!-- <li><a href="/login">Login</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              
-                  <li><a href="/alerts">Alerts</a></li>
-                  <li><a href="/map">View on Map</a></li>
-              
-
-            </ul>
-        </div>
-        <ul class="nav navbar-nav">
-                
-                <li><a href="/register">Register</a></li> -->
-  <h2>{{ user.firstname }} {{ user.lastname }}</h2>
-
-  <b><p style="color:green">Email: {{ user.email }}</p></b>
-
-  
-    <h3>Reports</h3>
+  <div class="container-fluid">
+<div class="row">
+  <div class="well spaced" id="userinfo">
+  <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+    <!-- <div class="well spaced" id="userinfo" style="width:97%"> -->
+  <h5>Welcome, {{ user.firstname }} {{ user.lastname }}</h5>
+  <b><p style="color:blue">Email: {{ user.email }}</p></b>
+    <!-- <h3>Reports</h3> -->
     <b><p style="color:blue"><a href="/addnewreport">Click here to add a new report:</a></p></b>
     <b><p style="color:blue"><a href="/illnessform">Click here to search reports:</a></p></b>
     <b><p style="color:blue"><a href="/illness-trends">View trends on chart</a></p></b>
+  <!-- <div class="row"> -->
+    <!-- <div class="well spaced" id="userinfo" style="width:97%"> -->
+  </section>
+<!-- </div> -->
+    <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+    <!-- <div class="well spaced" id="userinfo" style="width:97%"> -->
 
     {% if user.userreports %}
-    <ul>
+
+    <h5 text-align="center">Your reports</h5>
+    <ol>
     {% for report_object in user.userreports %}
       <li>
-        {{report_object.date_added}} {{ user.firstname }}
-        added the following illness report 
-        for {{report_object.address}} : {{report_object.report}}
-
+        <td>
+        {{report_object.date_added}}
+      </td>
+      <td>
+        {{report_object.address}} : {{report_object.report}}
+      </td>
       </li>
     {% endfor %}
-    </ul>
+    </ol>
 
     {% else %} 
-    <b><p style="color:blue">No reports found.
+    <b><p style="color:white">You have not added any reports.
 
   {% endif %}
+<!-- </div> -->
+</section>
+    <!-- <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right"> -->
+    <!-- <div class="well spaced" id="userinfo" style="width:97%"> -->
+
+      <!-- <b><p style="color:blue">Email: {{ user.email }}</p></b> -->
+    <!-- <h3>Reports</h3> -->
+    <!-- <b><p style="color:blue"><a href="/addnewreport">Click here to add a new report:</a></p></b> -->
+    <!-- <b><p style="color:blue"><a href="/illnessform">Click here to search reports:</a></p></b> -->
+    <!-- <b><p style="color:blue"><a href="/illness-trends">View trends on chart</a></p></b> -->
+  <!-- </div> -->
+  <!-- </section> -->
+  
+</div>
+</div>
 </div>
 {% endblock %}

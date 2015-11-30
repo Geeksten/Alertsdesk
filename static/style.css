@@ -1,65 +1,174 @@
-html, body {
+html body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+}
+.map {
+  height: 500px;
+  margin: 30px;
+}
+
+.gm-style-iw {
+  color: #04162b;
+}
+
+.spaced {
+margin-left:20px; 
+margin-top: 20px;
+}
+        
+.weatherresult {
+color:white;
+}
+
+.window-content {
+  color:black;
 }
 
 body {
-  background-image: url(img/aurora.jpg);
-  background-size: cover;
+  /*background-image: url(/static/img/background.jpg);*/
+  /*background-image: url(/static/img/blueglow.jpg);*/
+  background-image: url(/static/img/sun.jpg);
+
+
+  background-size:cover;
   background-repeat: no-repeat;
   background-position: center center;
-  color: #000;
+  color: white;
+  /*color: black;*/
+
   line-height: 1.3;
+  padding-top: 10px;
+  font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-.navbar {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
+h1 {
+  color: white;
+  /*color: #C8C8C8*/
+  /*color: black;*/
 }
 
-.navbar-default .navbar-brand, .navbar-default .navbar-nav li a {
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-
-}
-
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav li a:hover {
-  color: #ED8429;
+h2 {
+    text-align: left;
+    /*margin-bottom: 2em;*/
 }
 
 p {
-  margin-left: 150px;
+  margin-left:50px;
   margin-right: 150px;
-  text-align: center;
+  text-align: left;
   font-family: sans-serif;
   font-weight: 100;
-  font-size: 48px;
+  font-size: 24px;
   color: #fff;
   font-family: 'Raleway', sans-serif;
 }
 
-.left {
-  margin-top: 100px;
+label {
+  color:#C8C8C8;
 }
 
 form {
   margin-top: 25px;
 }
 
-#signup {
-    color: #ffd200;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 100;
-    color: #fff;
-    text-align: center;
-    padding-bottom: 10px;
-    margin-top: 125px;
+input[type="submit"] {
+  background: #C8C8C8;
+  border: 0;
+  width: 300px;
+  height: 40px;
+  border-radius: 0px;
+  color: black;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  transition: background 0.3s ease-in-out;
+}
+input[type="submit"]:hover {
+  /*background: #3399FF;*/
+  background: #663300;
+  color: #999900;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  animation-name: shake;
 }
 
+p, .window-content {
+  color:black;
+}
+
+h1, h2, h3, .navbar-brand { font-family: "Raleway"; }
+
+h5 {
+  color:#C8C8C8;
+}
+
+/*div.well.spaced {
+height: auto
+}*/
+
+.well {
+  min-height: 50px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #202020;
+  /* border: 1px solid #030303; */
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.form-control {
+display: block;
+display: block;
+width: 350px;
+height: 38px;
+padding: 8px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #888888;
+background-color:#e6e6e6;
+background-image: none;
+border: 1px solid #282828;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.navbar {
+  background: transparent;
+  border: none;
+  /*color: #000066;*/
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar-inverse .navbar-nav li a {
+  /*color: #000066;*/
+  color: white;
+  font-family: 'Raleway', sans-serif;  
+}
+
+.navbar-inverse .navbar-brand {
+  /*color: #000066;*/
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}    
+.navbar-default .navbar-brand, .navbar-default .navbar-nav li a {
+  /*color: #000066;*/
+  color: white;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav li a:hover {
+  /*color: white;*/
+  color: #996600;
+}
+
+.left {
+  margin-top: 100px;
+}
 
 .btn {
   margin: 25px;
@@ -84,57 +193,55 @@ form {
   border-color: #BFFF97;
 }
 
-
-input[type="text"], input[type="password"] {
-  width: 350px;
-  padding: 10px 0px;
-  background: transparent;
-  border: 0;
-  border-bottom: 1.5px solid #cccccc;
-  outline: none;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  font-family: 'Raleway', sans-serif;
-  margin-bottom: 50px;
-}
-
-input[type="submit"] {
-  background: #ccc;
-  border: 0;
-  width: 350px;
-  height: 40px;
-  border-radius: 0px;
-  color: #fff;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-input[type="submit"]:hover {
-  background: #cccccc;
-  animation-name: shake;
-}
-
-
-.illness-chart {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-}
+/*.illness-chart {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  }*/
 
 .chart-legend li span {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  font-color: white;
+  }
+
+#donutChart {
+  /*height:400px*/
+  width:400px;
 }
 
-body {
-    padding-top: 50px;
-    font-family: 'Raleway', sans-serif;
+#chartback {
+  height:400px;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 2em;
+/*#extending {
+  margin: 0px;
+  padding: 0px;
+  background-color: olive;
+  height:50px
+}*/
+
+/*#homepage-title {
+  margin: 0;
+  top: 0.5em;
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-weight: 400;
+  font-size: 500%;
+}*/
+
+#reports {
+  color: white;
+  min-height: 500px
+}
+
+#weatherbox {
+  color:white;
+}
+
+#userinfo{
+  min-height: 400px;
 }

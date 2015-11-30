@@ -2,29 +2,13 @@
 {% block head %}
 <style>
 
-  .illness-chart {
-      width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-  }
-
-  .chart-legend li span {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      margin-right: 5px;
-  }
-
-  body {
-      padding-top: 50px;
-      font-family: 'Raleway', sans-serif;
-  }
-
   h2 {
       text-align: left;
       margin-bottom: 2em;
   }
+
 </style>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 
 {% endblock %}
@@ -32,13 +16,26 @@
 
 {% block content %}
 
+<div> 
+  <h2>Illness trends </h2>
+</div>
+  <div class="row">
+  <div class="well spaced" id="chartback">
+<h4><a href="/illnessform">Click here to search reports</a></h4>
+  <!-- <div class="row"> -->
+  <!-- <div class="well spaced" id="chartback"> -->
+    <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-  <h2> Illness trends </h2>
-  <h4><a href="/illnessform">Click here to search reports</a> <br></h4>
-
-  <div class="illness-chart">
-    <canvas id="donutChart"></canvas>
-    <div id="donutLegend" class="chart-legend"></div>
+      <div class="illness-chart">
+      <canvas id="donutChart"></canvas>
+      </div>
+    </section>
+  
+    <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+      <div id="donutLegend" class="chart-legend">
+      </div>
+    </section>
+  </div>
   </div>
 
   <script>

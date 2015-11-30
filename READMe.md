@@ -15,22 +15,22 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ##MVP Core Functionality
 
-*Register new users
+*Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
 *Login/Logout:
     Store login information in the session. Log in required to access app features
 
-*Add reports
+*Add reports:
     Logged in users can add reports, search reports nad view trends on chart
 
-*Connect to Google Maps API
+*Connect to Google Maps API:
     Provides geolocation and helps map user-added reports using latitude and longitude
 
-*Search functionality
+*Search functionality:
     Allows users to search for reports using zipcode
    
-*Connect to OpenWeather API
+*Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
 

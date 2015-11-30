@@ -49,6 +49,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 ##API Reference
 
 *Google Maps
+
 *OpenWeather
 
 ##Contributors

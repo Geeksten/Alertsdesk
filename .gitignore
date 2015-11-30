@@ -1,0 +1,12 @@
+env/
+*.pyc
+todo.txt
+steps.txt
+secrets.sh
+api_instructions.txt
+debugging.txt
+fdaapi.py
+fdaqueries.txt
+from_fda.py
+seed_data/
+testing.py

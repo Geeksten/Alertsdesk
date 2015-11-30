@@ -2,11 +2,11 @@
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ##Synopsis
-*Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts. 
-*Integration of Google Maps API allows users to dynamically display the location of each alert. 
-*Users can also get a list of alerts by zipcode. 
-*A dynamic chart summarizes the illness trends using the number of reports querying by reported symptoms.
-*Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode.
+*Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts
+*Integration of Google Maps API allows users to dynamically display the location of each alert
+*Users can also get a list of alerts by zipcode
+*A dynamic chart summarizes the illness trends using the number of reports querying by reported symptoms
+*Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode
 
 
 ##MVP Core Functionality

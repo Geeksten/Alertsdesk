@@ -1,5 +1,4 @@
 ##Alertsdesk webapp
-===================
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ##Synopsis
@@ -11,7 +10,6 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 
 ##MVP Core Functionality
-========================
 
 *Register new users
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
@@ -33,7 +31,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 
 ##Add-on Features (in no order):
-================================
+
 *Option to sign up for email and/or text alerts
 *Option to text a specific number and get top three reports (by count) for specific zipcode
 *Integrate with twitter for log in (Oauth) and post to twitter
@@ -41,10 +39,10 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Twilio integration for option to add reports by text
 
 ##API Reference
-================
+
 *Google Maps
 *OpenWeather
 
 ##Contributors
-===============
+
 Christine Babu www.linkedin.com/in/christinebabu/

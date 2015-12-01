@@ -42,8 +42,8 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [Flask] - Lightweight web framework which also provides support for jinja templating and unittests
 * [Javascript] - Frontend code which allows for dynamic webpages, used to map reports ny latitude and longitude
 * [jQuery] - A Javascript library that simplifies DOM manipulation, including creating event handlers for user interaction
-* [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading times
-*[OpenWeather API]- Uses JSON to provide weather information
+* [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading    times
+* [OpenWeather API]- Uses JSON to provide weather information
 * [Google Maps API] - Uses geoJSON passed from the server to create dynamic reports.
 * [HTML] - Displays information on the web
 * [CSS] - Styles webpages

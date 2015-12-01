@@ -20,7 +20,7 @@ class MyFlaskIntegrationsTests(unittest.TestCase):
 
 
 class MyAlertsdeskDBTests(unittest.TestCase):
-    """This tests that a new user is registers successfully and is added to test database"""
+    """This tests that a new user is registered successfully and is added to test database"""
     def setUp(self):
         print "connecting to db"
         connect_to_db(app)

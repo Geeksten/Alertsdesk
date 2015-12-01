@@ -16,57 +16,6 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 *Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode
 
-
-##MVP Core Functionality
-
-![alertsdesk_home_page](/static/img/homepage.png)
-
-###Register new users
-
-*Check registration information against the database before adding new users to prevent multiple accounts under one email address
-
-![alertsdesk_register_page](/static/img/register.gif)
-
-###Login/Logout
-
-*Store login information in the session. Log in required to access app features
-
-![alertsdesk_login_page](/static/img/login.gif)
-
-###Add new report
-
-*Logged in users (verified through session) can add reports, search reports and view trends on chart
-
-![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
-
-###Search functionality using zipcode
-
-*Displays current weather data for given zipcode derived from OpenWeather API
-
-*Displays list of reports for given zipcode
-
-![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)
-
-###View trends on Chart
-
-*Users can view dynamic charts to see what illnesses are common
-
-![alertsdesk_view_chart](/static/img/viewchart.gif)
-
-###Connect to Google Maps API:
-    
-*Provides geolocation and helps map user-added reports using latitude and longitude
-
-![alertsdesk_browse_map](/static/img/browsemap.gif)
-
-###Logout
-
-*Deletes user session
-
-![alertsdesk_logout](/static/img/logout.gif)
-
-
-
 ##Technology Stack
 
 * [SQLite] - Database contains Users and Userreports
@@ -81,6 +30,59 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [HTML] - Displays information on the web
 * [CSS] - Styles webpages
 * [Twitter Bootstrap] - Frontend UI framework for quick styling
+
+
+##MVP Core Functionality
+
+![alertsdesk_home_page](/static/img/homepage.png)
+
+###Register new users
+
+*Check registration information against the SQLite database before adding new users to prevent multiple accounts under one email address
+
+![alertsdesk_register_page](/static/img/register.gif)
+
+###Login/Logout
+
+*Store login information in the session. Log in required to access app features
+
+![alertsdesk_login_page](/static/img/login.gif)
+
+###Add new report
+
+*Logged in users (verified through session) can add reports to db, see reports they have added, search reports from db, browse map and view illness trends on dynamic chart
+
+*Uses Google Maps API to geocode address on new reports, extracting latitude and longitude for plotting on google maps
+
+![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
+
+###Search functionality using zipcode
+
+*Displays current weather data for given zipcode derived from OpenWeather API
+
+*Displays list of reports for given zipcode by querying the database.
+
+![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)
+
+###View illnesses using to Google Maps API:
+    
+*Users can browse through map to see what illnesses were reported in different areas
+
+![alertsdesk_browse_map](/static/img/browsemap.gif)
+
+
+###View trends on Chart
+
+*Users can view dynamic chart plotted using Chart.js to see what illnesses are common
+
+![alertsdesk_view_chart](/static/img/viewchart.gif)
+
+###Logout
+
+*User logs out of their flask session. All actions performed within their flask session are committed and stored within the database. Reports added during the session can be seen under user profile.
+
+![alertsdesk_logout](/static/img/logout.gif)
+
 
 ##Clone or fork this repo: 
 * You will need a secrets.sh file containing api keys for open weather and googlemaps.

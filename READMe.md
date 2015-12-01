@@ -3,6 +3,7 @@
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ##Synopsis
+
 *Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts
 
 *Integration of Google Maps API allows users to dynamically display the location of each alert
@@ -18,22 +19,26 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ![alertsdesk_home_page](/static/img/homepage.png)
 
-###Register new users:
+###Register new users
+
 *Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
 ![alertsdesk_register_page](/static/img/register.gif)
 
-###Login/Logout:
+###Login/Logout
+
 *Store login information in the session. Log in required to access app features
 
 ![alertsdesk_login_page](/static/img/login.gif)
 
-###Add new report:
+###Add new report
+
 *Logged in users can add reports, search reports nad view trends on chart
 
 ![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
 
-###Search functionality:
+###Search functionality
+
 *Allows users to search for reports using zipcode
 
 ![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)

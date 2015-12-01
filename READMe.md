@@ -50,6 +50,8 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [Twitter Bootstrap] - Frontend UI framework for quick styling
 
 ###Clone or fork this repo: 
+* You will need a secrets.sh file containing api keys for open weather and googlemaps.
+* You will also need an app key for the app
 ```
 https://github.com/Geeksten/Alertsdesk.git
 ```

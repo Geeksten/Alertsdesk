@@ -22,7 +22,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [SQLAlchemy] - Streamlines database queries
 * [Python] - Backend code that manipulates incoming data, controls access to the database, and serves data to the webpage through a framework
 * [Flask] - Lightweight web framework which also provides support for jinja templating and unittests
-* [Javascript] - Frontend code which allows for dynamic webpages, used to map reports ny latitude and longitude
+* [Javascript] - Frontend code which allows for dynamic webpages, used to map reports by latitude and longitude
 * [jQuery] - A Javascript library that simplifies DOM manipulation, including creating event handlers for user interaction
 * [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading    times
 * [OpenWeather API] - Uses JSON to provide weather information

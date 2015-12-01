@@ -21,6 +21,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
+![alertsdesk_register_page](/static/img/register.gif)
 
 *Login/Logout:
     Store login information in the session. Log in required to access app features

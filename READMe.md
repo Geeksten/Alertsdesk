@@ -1,7 +1,8 @@
-##Alertsdesk webapp
+#Alertsdesk webapp
+
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
-##Synopsis
+###Synopsis
 *Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts
 
 *Integration of Google Maps API allows users to dynamically display the location of each alert
@@ -13,7 +14,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode
 
 
-##MVP Core Functionality
+###MVP Core Functionality
 
 *Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
@@ -33,11 +34,22 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
-##Technologies
+###Stack
 
-Python, Flask, SQLite3, SQLAlchemy, HTML/CSS, Jinja, Twitter Bootstrap, Javascript, jQuery, AJAX OpenWeather API, Google Maps API
+* [SQLite] - Database contains Users and Userreports
+* [SQLAlchemy] - Streamlines database queries
+* [Python] - Backend code that manipulates incoming data, controls access to the database, and serves data to the webpage through a framework
+* [Flask] - Lightweight web framework which also provides support for jinja templating and unittests
+* [Javascript] - Frontend code which allows for dynamic webpages, used to map reports ny latitude and longitude
+* [jQuery] - A Javascript library that simplifies DOM manipulation, including creating event handlers for user interaction
+* [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading times
+*[OpenWeather API]- Uses JSON to provide weather information
+* [Google Maps API] - Uses geoJSON passed from the server to create dynamic reports.
+* [HTML] - Displays information on the web
+* [CSS] - Styles webpages
+* [Twitter Bootstrap] - Frontend UI framework for quick styling
 
-##Version 2.0: Add-on Features (in no order):
+###Version 2.0: Add-on Features (in no order):
 
 *Option to sign up for email and/or text alerts
 
@@ -48,12 +60,6 @@ Python, Flask, SQLite3, SQLAlchemy, HTML/CSS, Jinja, Twitter Bootstrap, Javascri
 *Integrate with facebook for log in (Oauth) and post to facebook
 
 *Twilio integration for option to add reports by text
-
-##API Reference
-
-*Google Maps
-
-*OpenWeather
 
 ##Contributors
 

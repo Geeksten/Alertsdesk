@@ -34,7 +34,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
-###Stack
+###Technology Stack
 
 * [SQLite] - Database contains Users and Userreports
 * [SQLAlchemy] - Streamlines database queries
@@ -43,11 +43,39 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [Javascript] - Frontend code which allows for dynamic webpages, used to map reports ny latitude and longitude
 * [jQuery] - A Javascript library that simplifies DOM manipulation, including creating event handlers for user interaction
 * [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading    times
-* [OpenWeather API]- Uses JSON to provide weather information
+* [OpenWeather API] - Uses JSON to provide weather information
 * [Google Maps API] - Uses geoJSON passed from the server to create dynamic reports.
 * [HTML] - Displays information on the web
 * [CSS] - Styles webpages
 * [Twitter Bootstrap] - Frontend UI framework for quick styling
+
+###Clone or fork this repo: 
+```
+https://github.com/Geeksten/Alertsdesk.git
+```
+Create and activate a virtual environment inside your project directory:
+```
+virtualenv env
+
+source env/bin/activate
+```
+Install the requirements:
+```
+pip install -r requirements.txt
+```
+Create the database:
+```
+python -i model.py
+
+db.create_all()
+
+quit()
+```
+Run you local server:
+```
+python server.py
+```
+Navigate to ```localhost:5000```
 
 ###Version 2.0: Add-on Features (in no order):
 

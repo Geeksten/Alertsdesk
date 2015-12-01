@@ -2,7 +2,7 @@
 
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
-###Synopsis
+##Synopsis
 *Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts
 
 *Integration of Google Maps API allows users to dynamically display the location of each alert
@@ -14,25 +14,28 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode
 
 
-###MVP Core Functionality
+##MVP Core Functionality
 
 ![alertsdesk_home_page](/static/img/homepage.png)
 
-*Register new users:
+###Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
 ![alertsdesk_register_page](/static/img/register.gif)
 
-*Login/Logout:
+###Login/Logout:
     Store login information in the session. Log in required to access app features
 
 ![alertsdesk_login_page](/static/img/login.gif)
 
-*Add reports:
+###Add new report:
     Logged in users can add reports, search reports nad view trends on chart
+
+![alertsdesk_login_page](/static/img/addnewreport.gif)
 
 *Connect to Google Maps API:
     Provides geolocation and helps map user-added reports using latitude and longitude
+
 
 *Search functionality:
     Allows users to search for reports using zipcode
@@ -40,7 +43,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
-###Technology Stack
+##Technology Stack
 
 * [SQLite] - Database contains Users and Userreports
 * [SQLAlchemy] - Streamlines database queries
@@ -55,7 +58,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [CSS] - Styles webpages
 * [Twitter Bootstrap] - Frontend UI framework for quick styling
 
-###Clone or fork this repo: 
+##Clone or fork this repo: 
 * You will need a secrets.sh file containing api keys for open weather and googlemaps.
 * You will also need an app key for the app
 ```
@@ -87,7 +90,7 @@ python server.py
 ```
 Navigate to ```localhost:5000```
 
-###Version 2.0: Add-on Features (in no order):
+##Version 2.0: Add-on Features (in no order):
 
 *Option to sign up for email and/or text alerts
 
@@ -99,6 +102,6 @@ Navigate to ```localhost:5000```
 
 *Twilio integration for option to add reports by text
 
-###Contributors
+##Contributors
 
 Christine Babu www.linkedin.com/in/christinebabu/

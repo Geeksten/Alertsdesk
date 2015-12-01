@@ -15,9 +15,10 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 
 ###MVP Core Functionality
-
+![alertsdesk_home_page](/static/img/homepage.png)
 *Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
+
 
 *Login/Logout:
     Store login information in the session. Log in required to access app features
@@ -60,6 +61,8 @@ Create and activate a virtual environment inside your project directory:
 virtualenv env
 
 source env/bin/activate
+
+source secrets.sh
 ```
 Install the requirements:
 ```
@@ -91,6 +94,6 @@ Navigate to ```localhost:5000```
 
 *Twilio integration for option to add reports by text
 
-##Contributors
+###Contributors
 
 Christine Babu www.linkedin.com/in/christinebabu/

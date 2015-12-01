@@ -19,26 +19,30 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 ![alertsdesk_home_page](/static/img/homepage.png)
 
 ###Register new users:
-    Check registration information against the database before adding new users to prevent multiple accounts under one email address
+*Check registration information against the database before adding new users to prevent multiple accounts under one email address
 
 ![alertsdesk_register_page](/static/img/register.gif)
 
 ###Login/Logout:
-    Store login information in the session. Log in required to access app features
+*Store login information in the session. Log in required to access app features
 
 ![alertsdesk_login_page](/static/img/login.gif)
 
 ###Add new report:
-    Logged in users can add reports, search reports nad view trends on chart
+*Logged in users can add reports, search reports nad view trends on chart
 
 ![alertsdesk_login_page](/static/img/addnewreport.gif)
+
+###Search functionality:
+*Allows users to search for reports using zipcode
+
+![alertsdesk_login_page](/static/img/searchbyzip.gif)
 
 *Connect to Google Maps API:
     Provides geolocation and helps map user-added reports using latitude and longitude
 
 
-*Search functionality:
-    Allows users to search for reports using zipcode
+
    
 *Connect to OpenWeather API:
     When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode

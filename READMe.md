@@ -15,7 +15,9 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 
 ###MVP Core Functionality
-![alertsdesk_home_page](/static/img/homepage.png)
+
+![image](/static/img/homepage.png)
+
 *Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
 

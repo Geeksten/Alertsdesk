@@ -33,24 +33,29 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ###Add new report
 
-*Logged in users can add reports, search reports nad view trends on chart
+*Logged in users (verified through session) can add reports, search reports and view trends on chart
 
 ![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
 
-###Search functionality
+###Search functionality using zipcode
 
-*Allows users to search for reports using zipcode
+*Displays current weather data for given zipcode derived from OpenWeather API
+
+*Displays list of reports for given zipcode
 
 ![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)
+
+###View trends on Chart
+
+*Users can view dynamic charts to see what illnesses are common
+
+![alertsdesk_view_chart](/static/img/viewchart.gif)
 
 *Connect to Google Maps API:
     Provides geolocation and helps map user-added reports using latitude and longitude
 
 
 
-   
-*Connect to OpenWeather API:
-    When user searches for illness reports by zipcode, the app also displays current weather for the given zipcode
 
 ##Technology Stack
 

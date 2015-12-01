@@ -1,5 +1,7 @@
 #Alertsdesk webapp
 
+This app was built in 4 weeks during the Fall 2015 cohort of Hackbright Academy's Software Engineering Fellowship.
+
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ##Synopsis
@@ -56,6 +58,13 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 *Provides geolocation and helps map user-added reports using latitude and longitude
 
 ![alertsdesk_browse_map](/static/img/browsemap.gif)
+
+###Logout
+
+*Deletes user session
+
+![alertsdesk_logout](/static/img/logout.gif)
+
 
 
 ##Technology Stack

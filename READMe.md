@@ -51,10 +51,11 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ![alertsdesk_view_chart](/static/img/viewchart.gif)
 
-*Connect to Google Maps API:
-    Provides geolocation and helps map user-added reports using latitude and longitude
+###Connect to Google Maps API:
+    
+*Provides geolocation and helps map user-added reports using latitude and longitude
 
-
+![alertsdesk_browse_map](/static/img/browsemap.gif)
 
 
 ##Technology Stack

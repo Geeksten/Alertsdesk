@@ -16,7 +16,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ###MVP Core Functionality
 
-![image](/static/img/homepage.png)
+![alertsdesk_home_page](/static/img/homepage.png)
 
 *Register new users:
     Check registration information against the database before adding new users to prevent multiple accounts under one email address
@@ -25,6 +25,8 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 *Login/Logout:
     Store login information in the session. Log in required to access app features
+
+![alertsdesk_login_page](/static/img/login.gif)
 
 *Add reports:
     Logged in users can add reports, search reports nad view trends on chart

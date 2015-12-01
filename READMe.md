@@ -31,12 +31,12 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 ###Add new report:
 *Logged in users can add reports, search reports nad view trends on chart
 
-![alertsdesk_login_page](/static/img/addnewreport.gif)
+![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
 
 ###Search functionality:
 *Allows users to search for reports using zipcode
 
-![alertsdesk_login_page](/static/img/searchbyzip.gif)
+![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)
 
 *Connect to Google Maps API:
     Provides geolocation and helps map user-added reports using latitude and longitude

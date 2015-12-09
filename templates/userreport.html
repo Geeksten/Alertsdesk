@@ -12,7 +12,7 @@
     <ul>
     {% for report_object in userreport_list %}
       <li>
-        for zipcode {{report_object.address}} : {{report_object.report}}
+        for {{report_object.address}} : {{report_object.report}}
       </li>
     {% endfor %}
     </ul>

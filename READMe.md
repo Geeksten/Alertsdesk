@@ -116,7 +116,7 @@ python server.py
 ```
 Navigate to ```localhost:5000```
 
-##Version 2.0: Add-on Features (in no order):
+### Version 2.0: Add-on Features (in no order):
 
 *Option to sign up for email and/or text alerts
 
@@ -128,6 +128,6 @@ Navigate to ```localhost:5000```
 
 *Twilio integration for option to add reports by text
 
-##Contributors
+### Contributors
 
 Christine Babu www.linkedin.com/in/christinebabu/

@@ -1,10 +1,10 @@
-#Alertsdesk webapp
+## Alertsdesk webapp
 
 This app was built in 4 weeks during the Fall 2015 cohort of Hackbright Academy's Software Engineering Fellowship.
 
 Learn more about the developer: www.linkedin.com/in/christinebabu/
 
-##Synopsis
+### Synopsis
 
 *Alertsdesk is a fullstack web application designed for tracking user generated info about illnesses and other health related alerts
 
@@ -16,7 +16,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 *Alertsdesk uses the OpenWeather API to provide current weather information for given zipcode
 
-##Technology Stack
+### Technology Stack
 
 * [SQLite] - Database contains Users and Userreports
 * [SQLAlchemy] - Streamlines database queries
@@ -32,23 +32,23 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 * [Twitter Bootstrap] - Frontend UI framework for quick styling
 
 
-##MVP Core Functionality
+### MVP Core Functionality
 
 ![alertsdesk_home_page](/static/img/homepage.png)
 
-###Register new users
+#### Register new users
 
 *Check registration information against the SQLite database before adding new users to prevent multiple accounts under one email address
 
 ![alertsdesk_register_page](/static/img/register.gif)
 
-###Login/Logout
+#### Login/Logout
 
 *Store login information in the session. Log in required to access app features
 
 ![alertsdesk_login_page](/static/img/login.gif)
 
-###Add new report
+#### Add new report
 
 *Logged in users (verified through session) can add reports to db, see reports they have added, search reports from db, browse map and view illness trends on dynamic chart
 
@@ -56,7 +56,7 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ![alertsdesk_add_new_report_page](/static/img/addnewreport.gif)
 
-###Search functionality using zipcode
+#### Search functionality using zipcode
 
 *Displays current weather data for given zipcode derived from OpenWeather API
 
@@ -64,27 +64,27 @@ Learn more about the developer: www.linkedin.com/in/christinebabu/
 
 ![alertsdesk_search_by_zip_page](/static/img/searchbyzip.gif)
 
-###View illnesses using to Google Maps API:
+#### View illnesses using to Google Maps API:
     
 *Users can browse through map to see what illnesses were reported in different areas
 
 ![alertsdesk_browse_map](/static/img/browsemap.gif)
 
 
-###View trends on Chart
+#### View trends on Chart
 
 *Users can view dynamic chart plotted using Chart.js to see what illnesses are common
 
 ![alertsdesk_view_chart](/static/img/viewchart.gif)
 
-###Logout
+#### Logout
 
 *User logs out of their flask session. All actions performed within their flask session are committed and stored within the database. Reports added during the session can be seen under user profile.
 
 ![alertsdesk_logout](/static/img/logout.gif)
 
 
-##Clone or fork this repo: 
+### Clone or fork this repo: 
 * You will need a secrets.sh file containing api keys for open weather and googlemaps.
 * You will also need an app key for the app
 ```
